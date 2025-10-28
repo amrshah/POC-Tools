@@ -1,0 +1,3 @@
+# Ignore Cloudflare configuration files
+.cloudflare/
+/.cloudflare-worker
