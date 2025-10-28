@@ -605,10 +605,11 @@
         
         // Use a generic placeholder API key if the environment variables aren't injected
         // The Canvas environment is expected to proxy and fill this key correctly.
-        const apiKey = "AIzaSyBhGPHSbceV9v_yjPbWqnDv-Uig7EslTjw";
+        const apiKey = ""; //moved to cloud flare worker for security
         
         // --- GEMINI API CALLER FUNCTION ---
         /**
+         * Proxy through cloudflare worker to keep API key secure
          * Generic function to call the Gemini API with exponential backoff.
          * @param {string} userQuery - The main text query.
          * @param {object} generationConfig - Configuration for the generation (e.g., structured output schema).
@@ -616,7 +617,7 @@
          * @returns {Promise<object>} The parsed response JSON or null on failure.
          */
         async function callGeminiAPI(userQuery, generationConfig = {}, systemInstruction = null) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const apiUrl = `https://gemini-api-keys.amr-shah.workers.dev`;
             const maxRetries = 3;
             
             const payload = {
