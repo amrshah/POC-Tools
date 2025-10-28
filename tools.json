@@ -1,4 +1,9 @@
 [
+{
+    "name": "AI Strategy Suggestion Tool",
+    "description": "A tool that suggests AI strategies for a given challenge in your business.",
+    "link": "./tools/ai-strategy-suggestion/"
+  },
   {
     "name": "Image Optimizer",
     "description": "A simple client-side image compression tool using Canvas API.",
