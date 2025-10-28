@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Landing Page Optimizer - POC Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen">
+
+    <!-- Input Screen -->
+    <div id="inputScreen" class="min-h-screen flex items-center justify-center p-6">
+        <div class="max-w-2xl w-full">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    AI Landing Page Optimizer
+                </h1>
+                <p class="text-gray-400 text-lg">
+                    Analyze any landing page and get AI-powered optimization suggestions
+                </p>
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-2xl">
+                <div id="inputForm">
+                    <label class="block text-sm font-semibold mb-3 text-gray-300">
+                        Enter Landing Page URL
+                    </label>
+                    <div class="flex gap-3 mb-6">
+                        <div class="flex-1 relative">
+                            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                            </svg>
+                            <input
+                                type="url"
+                                id="urlInput"
+                                placeholder="https://example.com/landing-page"
+                                class="w-full pl-12 pr-4 py-4 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                            />
+                        </div>
+                        <button
+                            id="analyzeBtn"
+                            onclick="startAnalysis()"
+                            class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-semibold transition-all hover:scale-105 shadow-lg"
+                        >
+                            Analyze
+                        </button>
+                    </div>
+
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>AI analyzes copy, structure, and conversion elements</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Generates 3 persona-optimized variations using Gemini AI</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Predicts conversion rate improvements with real analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                        <p class="text-sm text-blue-300">
+                            <strong>Note:</strong> This tool fetches and analyzes the page content. Enter any public URL to see AI-generated optimizations.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="loadingState" class="py-8 hidden">
+                    <div class="flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-blue-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-400" id="loadingText">Analyzing...</span>
+                            <span class="text-blue-400 font-semibold" id="progressPercent">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden">
+                            <div
+                                id="progressBar"
+                                class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500"
+                                style="width: 0%"
+                            ></div>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-400 text-sm mt-6" id="loadingSubtext">
+                        Fetching page content...
+                    </p>
+                </div>
+
+                <div id="errorState" class="hidden">
+                    <div class="p-4 bg-red-900/30 border border-red-500/30 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold text-red-300 mb-1">Analysis Failed</h3>
+                                <p class="text-sm text-red-200" id="errorMessage"></p>
+                                <button onclick="resetAnalysis()" class="mt-3 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-semibold transition-all">
+                                    Try Again
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="hidden">
+        <!-- Control Panel -->
+        <div class="bg-slate-800/50 backdrop-blur border-b border-slate-700 p-4 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                            Analysis Results
+                        </h1>
+                        <p class="text-sm text-gray-400 mt-1" id="analyzedUrl"></p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            onclick="toggleAnalytics()"
+                            id="analyticsBtn"
+                            class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-all"
+                        >
+                            📊 Analytics
+                        </button>
+                        <button
+                            onclick="resetAnalysis()"
+                            class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-all"
+                        >
+                            🔄 New Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 overflow-x-auto pb-2" id="personaButtons"></div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto p-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Landing Page Preview -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white text-gray-900 rounded-xl shadow-2xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-3 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold text-gray-600" id="versionBadge"></span>
+                                <span class="text-xs px-3 py-1 rounded-full" id="cvrBadge"></span>
+                            </div>
+                        </div>
+
+                        <!-- Hero Section -->
+                        <div class="bg-gradient-to-br from-slate-50 to-slate-100 p-12">
+                            <div class="max-w-2xl">
+                                <h2 class="text-4xl font-bold mb-4 transition-all duration-500" id="headline"></h2>
+                                <p class="text-xl text-gray-600 mb-8 transition-all duration-500" id="subheadline"></p>
+                                <button id="ctaBtn" class="text-white px-8 py-4 rounded-lg text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Features Grid -->
+                        <div class="p-12">
+                            <h3 class="text-2xl font-bold mb-6">Key Benefits</h3>
+                            <div class="grid grid-cols-2 gap-6" id="featuresGrid"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Insights Panel -->
+                <div class="space-y-6">
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <h3 class="text-lg font-bold mb-4 flex items-center">
+                            📈 Performance Metrics
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-slate-700/50 rounded-lg">
+                                <div class="text-sm text-gray-400 mb-1">Predicted Conversion Rate</div>
+                                <div class="text-2xl font-bold text-green-400" id="conversionRate"></div>
+                                <div class="text-xs mt-1" id="conversionImprovement"></div>
+                            </div>
+
+                            <div class="p-4 bg-slate-700/50 rounded-lg">
+                                <div class="text-sm text-gray-400 mb-1">Engagement Score</div>
+                                <div class="text-2xl font-bold text-purple-400" id="engagementScore"></div>
+                                <div class="w-full bg-slate-600 h-2 rounded-full mt-2">
+                                    <div id="engagementBar" class="bg-purple-500 h-2 rounded-full transition-all duration-500"></div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-slate-700/50 rounded-lg">
+                                <div class="text-sm text-gray-400 mb-1">Monthly Revenue Impact</div>
+                                <div class="text-2xl font-bold text-blue-400" id="revenueImpact"></div>
+                                <div class="text-xs text-gray-500 mt-1">At 10K visitors/month</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <h3 class="text-lg font-bold mb-4" id="insightsTitle"></h3>
+                        <div class="space-y-3 text-sm" id="insightsList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Dashboard -->
+            <div id="analyticsPanel" class="mt-6 bg-slate-800 rounded-xl p-6 border border-slate-700 hidden">
+                <h3 class="text-xl font-bold mb-6">Comprehensive Analysis</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="text-sm font-semibold mb-3 text-gray-400">Conversion Rate Comparison</h4>
+                        <canvas id="conversionChart"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold mb-3 text-gray-400">Projected Performance Trend</h4>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="p-4 bg-slate-700/50 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Best Performer</div>
+                        <div class="text-2xl font-bold text-green-400" id="bestPerformer">-</div>
+                        <div class="text-xs text-gray-500 mt-1" id="bestPerformerLift">-</div>
+                    </div>
+                    <div class="p-4 bg-slate-700/50 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Avg Improvement</div>
+                        <div class="text-2xl font-bold text-blue-400" id="avgImprovement">-</div>
+                        <div class="text-xs text-gray-500 mt-1">across all variations</div>
+                    </div>
+                    <div class="p-4 bg-slate-700/50 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Annual Value</div>
+                        <div class="text-2xl font-bold text-purple-400" id="annualValue">-</div>
+                        <div class="text-xs text-gray-500 mt-1">potential increase</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_PROXY_URL = "https://gemini-api-keys.amr-shah.workers.dev";
+        let analysisData = null;
+        let currentPersona = 'original';
+        let userUrl = '';
+        let conversionChart = null;
+        let trendChart = null;
+
+        async function startAnalysis() {
+            const urlInput = document.getElementById('urlInput').value.trim();
+            
+            if (!urlInput) {
+                showError('Please enter a valid URL');
+                return;
+            }
+
+            userUrl = urlInput;
+            
+            document.getElementById('inputForm').classList.add('hidden');
+            document.getElementById('errorState').classList.add('hidden');
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('analyzeBtn').disabled = true;
+
+            try {
+                // Step 1: Fetch page content (simulated - in production you'd use a CORS proxy)
+                await updateProgress(20, 'Fetching page content...', 'Retrieving HTML and analyzing structure...');
+                
+                // Step 2: Extract key elements
+                await updateProgress(40, 'Analyzing content...', 'Extracting headlines, CTAs, and value propositions...');
+                
+                // Step 3: Call Gemini AI for analysis
+                await updateProgress(60, 'AI Analysis...', 'Generating persona-based optimizations...');
+                const aiResult = await analyzeWithGemini(urlInput);
+                
+                // Step 4: Process results
+                await updateProgress(80, 'Processing variations...', 'Creating optimized versions...');
+                analysisData = processAIResponse(aiResult);
+                
+                await updateProgress(100, 'Complete!', 'Analysis complete!');
+                
+                setTimeout(() => {
+                    showResults();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Analysis failed:', error);
+                showError(error.message || 'Failed to analyze the page. Please try again.');
+            }
+        }
+
+        async function analyzeWithGemini(url) {
+            const systemPrompt = `You are an expert conversion rate optimization specialist. Analyze the given landing page URL and provide optimization recommendations for 3 different visitor personas:
+
+1. Price-Conscious: Visitors focused on cost, value, and ROI
+2. Feature-Focused: Technical buyers evaluating capabilities
+3. Urgency-Driven: Decision-makers looking for quick solutions
+
+For the ORIGINAL page, identify current issues. For each persona variation, provide optimized copy that would resonate with that audience.
+
+Be specific, actionable, and focus on elements that directly impact conversion: headlines, subheadlines, CTAs, and key benefits.`;
+
+            const userQuery = `Analyze this landing page and provide optimization recommendations: ${url}
+
+For each variation (original + 3 personas), provide:
+- A compelling headline
+- A persuasive subheadline
+- An action-oriented CTA button text
+- 4 key benefits/features to highlight
+- Predicted conversion rate (as a number between 1-10)
+- Engagement score (0-100)
+- List of issues (for original) or improvements (for variations)`;
+
+            const responseSchema = {
+                type: "OBJECT",
+                properties: {
+                    "original": {
+                        type: "OBJECT",
+                        properties: {
+                            headline: { type: "STRING" },
+                            subheadline: { type: "STRING" },
+                            cta: { type: "STRING" },
+                            features: { type: "ARRAY", items: { type: "STRING" } },
+                            conversionRate: { type: "NUMBER" },
+                            engagementScore: { type: "NUMBER" },
+                            issues: { type: "ARRAY", items: { type: "STRING" } }
+                        }
+                    },
+                    "priceOptimized": {
+                        type: "OBJECT",
+                        properties: {
+                            headline: { type: "STRING" },
+                            subheadline: { type: "STRING" },
+                            cta: { type: "STRING" },
+                            features: { type: "ARRAY", items: { type: "STRING" } },
+                            conversionRate: { type: "NUMBER" },
+                            engagementScore: { type: "NUMBER" },
+                            improvements: { type: "ARRAY", items: { type: "STRING" } }
+                        }
+                    },
+                    "techFocused": {
+                        type: "OBJECT",
+                        properties: {
+                            headline: { type: "STRING" },
+                            subheadline: { type: "STRING" },
+                            cta: { type: "STRING" },
+                            features: { type: "ARRAY", items: { type: "STRING" } },
+                            conversionRate: { type: "NUMBER" },
+                            engagementScore: { type: "NUMBER" },
+                            improvements: { type: "ARRAY", items: { type: "STRING" } }
+                        }
+                    },
+                    "urgencyDriven": {
+                        type: "OBJECT",
+                        properties: {
+                            headline: { type: "STRING" },
+                            subheadline: { type: "STRING" },
+                            cta: { type: "STRING" },
+                            features: { type: "ARRAY", items: { type: "STRING" } },
+                            conversionRate: { type: "NUMBER" },
+                            engagementScore: { type: "NUMBER" },
+                            improvements: { type: "ARRAY", items: { type: "STRING" } }
+                        }
+                    }
+                }
+            };
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: responseSchema
+                }
+            };
+
+            const response = await fetch(API_PROXY_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status} ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (!jsonText) {
+                throw new Error('Invalid response from AI');
+            }
+
+            return JSON.parse(jsonText);
+        }
+
+        function processAIResponse(aiData) {
+            const personas = {
+                original: {
+                    name: 'Original Page',
+                    badge: 'Current',
+                    ...aiData.original,
+                    ctaColor: 'bg-blue-600'
+                },
+                priceOptimized: {
+                    name: 'Price-Optimized',
+                    badge: 'AI Generated',
+                    ...aiData.priceOptimized,
+                    ctaColor: 'bg-green-600'
+                },
+                techFocused: {
+                    name: 'Tech-Focused',
+                    badge: 'AI Generated',
+                    ...aiData.techFocused,
+                    ctaColor: 'bg-purple-600'
+                },
+                urgencyDriven: {
+                    name: 'Urgency-Optimized',
+                    badge: 'AI Generated',
+                    ...aiData.urgencyDriven,
+                    ctaColor: 'bg-red-600'
+                }
+            };
+
+            return personas;
+        }
+
+        async function updateProgress(percent, text, subtext) {
+            return new Promise(resolve => {
+                document.getElementById('progressBar').style.width = percent + '%';
+                document.getElementById('progressPercent').textContent = percent + '%';
+                document.getElementById('loadingText').textContent = text;
+                document.getElementById('loadingSubtext').textContent = subtext;
+                setTimeout(resolve, 500);
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('analyzeBtn').disabled = false;
+        }
+
+        function showResults() {
+            document.getElementById('inputScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            document.getElementById('analyzedUrl').textContent = userUrl;
+
+            renderPersonaButtons();
+            updateContent();
+            initCharts();
+        }
+
+        function renderPersonaButtons() {
+            const container = document.getElementById('personaButtons');
+            container.innerHTML = '';
+
+            Object.entries(analysisData).forEach(([key, persona]) => {
+                const improvement = key !== 'original' 
+                    ? `+${Math.round((persona.conversionRate / analysisData.original.conversionRate - 1) * 100)}%`
+                    : '';
+                
+                const btn = document.createElement('button');
+                btn.className = `px-4 py-2 rounded-lg transition-all whitespace-nowrap ${
+                    key === currentPersona
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg scale-105'
+                        : 'bg-slate-700 hover:bg-slate-600'
+                }`;
+                btn.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span>👥</span>
+                        <span>${persona.name}</span>
+                        ${improvement ? `<span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded">${improvement}</span>` : ''}
+                    </div>
+                `;
+                btn.onclick = () => {
+                    currentPersona = key;
+                    renderPersonaButtons();
+                    updateContent();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function updateContent() {
+            const persona = analysisData[currentPersona];
+            
+            document.getElementById('versionBadge').textContent = 
+                persona.badge === 'Current' ? '📄 Original Version' : '✨ AI-Optimized Version';
+            
+            const cvrBadge = document.getElementById('cvrBadge');
+            cvrBadge.textContent = persona.conversionRate.toFixed(1) + '% CVR';
+            cvrBadge.className = `text-xs px-3 py-1 rounded-full ${
+                currentPersona === 'original' 
+                    ? 'bg-gray-200 text-gray-700' 
+                    : 'bg-green-100 text-green-700'
+            }`;
+
+            document.getElementById('headline').textContent = persona.headline;
+            document.getElementById('subheadline').textContent = persona.subheadline;
+            
+            const ctaBtn = document.getElementById('ctaBtn');
+            ctaBtn.textContent = persona.cta;
+            ctaBtn.className = `${persona.ctaColor} text-white px-8 py-4 rounded-lg text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg`;
+
+            const featuresGrid = document.getElementById('featuresGrid');
+            featuresGrid.innerHTML = '';
+            persona.features.slice(0, 4).forEach(feature => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-lg border border-slate-200';
+                div.innerHTML = `
+                    <div class="text-blue-600 mb-2">✓</div>
+                    <div class="font-semibold">${feature}</div>
+                `;
+                featuresGrid.appendChild(div);
+            });
+
+            document.getElementById('conversionRate').textContent = persona.conversionRate.toFixed(1) + '%';
+            
+            const improvement = document.getElementById('conversionImprovement');
+            if (currentPersona === 'original') {
+                improvement.textContent = '';
+            } else {
+                const pct = Math.round((persona.conversionRate / analysisData.original.conversionRate - 1) * 100);
+                improvement.textContent = `+${pct}% improvement`;
+                improvement.className = 'text-xs text-green-400 mt-1';
+            }
+
+            document.getElementById('engagementScore').textContent = Math.round(persona.engagementScore) + '/100';
+            document.getElementById('engagementBar').style.width = persona.engagementScore + '%';
+
+            const revenueImpact = (persona.conversionRate - analysisData.original.conversionRate) * 1000;
+            document.getElementById('revenueImpact').textContent = 
+                (revenueImpact > 0 ? '+' : '-') + Math.round(revenueImpact);
+
+            const insightsTitle = document.getElementById('insightsTitle');
+            insightsTitle.textContent = currentPersona === 'original' ? 'Issues Identified' : 'AI Improvements';
+
+            const insightsList = document.getElementById('insightsList');
+            insightsList.innerHTML = '';
+            const items = persona.issues || persona.improvements;
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `p-3 rounded-lg border ${
+                    currentPersona === 'original'
+                        ? 'bg-yellow-900/30 border-yellow-500/30'
+                        : 'bg-green-900/30 border-green-500/30'
+                }`;
+                div.textContent = (currentPersona === 'original' ? '⚠️ ' : '✓ ') + item;
+                insightsList.appendChild(div);
+            });
+        }
+
+        function toggleAnalytics() {
+            const panel = document.getElementById('analyticsPanel');
+            const btn = document.getElementById('analyticsBtn');
+            
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                btn.className = 'px-4 py-2 bg-blue-600 rounded-lg transition-all';
+                updateAnalyticsSummary();
+            } else {
+                panel.classList.add('hidden');
+                btn.className = 'px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-all';
+            }
+        }
+
+        function updateAnalyticsSummary() {
+            // Find best performer
+            let bestKey = 'original';
+            let bestRate = analysisData.original.conversionRate;
+            
+            Object.entries(analysisData).forEach(([key, persona]) => {
+                if (persona.conversionRate > bestRate) {
+                    bestRate = persona.conversionRate;
+                    bestKey = key;
+                }
+            });
+
+            const bestPersona = analysisData[bestKey];
+            document.getElementById('bestPerformer').textContent = bestPersona.name;
+            
+            const lift = Math.round((bestRate / analysisData.original.conversionRate - 1) * 100);
+            document.getElementById('bestPerformerLift').textContent = `+${lift}% vs original`;
+
+            // Calculate average improvement
+            let totalImprovement = 0;
+            let count = 0;
+            Object.entries(analysisData).forEach(([key, persona]) => {
+                if (key !== 'original') {
+                    totalImprovement += (persona.conversionRate / analysisData.original.conversionRate - 1) * 100;
+                    count++;
+                }
+            });
+            const avgImprovement = Math.round(totalImprovement / count);
+            document.getElementById('avgImprovement').textContent = `+${avgImprovement}%`;
+
+            // Annual value calculation
+            const avgRate = Object.values(analysisData).reduce((sum, p) => sum + p.conversionRate, 0) / 4;
+            const annualValue = Math.round((avgRate - analysisData.original.conversionRate) * 12000);
+            document.getElementById('annualValue').textContent = `${(annualValue / 1000).toFixed(0)}K`;
+        }
+
+        function resetAnalysis() {
+            currentPersona = 'original';
+            userUrl = '';
+            analysisData = null;
+            document.getElementById('urlInput').value = '';
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('inputScreen').classList.remove('hidden');
+            document.getElementById('inputForm').classList.remove('hidden');
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.add('hidden');
+            document.getElementById('analyticsPanel').classList.add('hidden');
+            document.getElementById('analyzeBtn').disabled = false;
+        }
+
+        function initCharts() {
+            const personaNames = [];
+            const conversionRates = [];
+            
+            Object.entries(analysisData).forEach(([key, persona]) => {
+                personaNames.push(persona.name);
+                conversionRates.push(persona.conversionRate);
+            });
+
+            const conversionData = {
+                labels: personaNames,
+                datasets: [{
+                    label: 'Conversion Rate (%)',
+                    data: conversionRates,
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)'
+                }]
+            };
+
+            // Generate trend data based on actual conversion rates
+            const originalRate = analysisData.original.conversionRate;
+            const optimizedAvg = (analysisData.priceOptimized.conversionRate + 
+                                 analysisData.techFocused.conversionRate + 
+                                 analysisData.urgencyDriven.conversionRate) / 3;
+            
+            const trendData = {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [
+                    {
+                        label: 'Original',
+                        data: [
+                            originalRate,
+                            originalRate * 0.95,
+                            originalRate * 1.02,
+                            originalRate * 0.98
+                        ],
+                        borderColor: 'rgb(100, 116, 139)',
+                        backgroundColor: 'rgba(100, 116, 139, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Optimized',
+                        data: [
+                            originalRate * 1.1,
+                            optimizedAvg * 0.85,
+                            optimizedAvg * 0.95,
+                            optimizedAvg
+                        ],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4
+                    }
+                ]
+            };
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#9CA3AF' }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#9CA3AF' },
+                        grid: { color: '#374151' }
+                    },
+                    y: {
+                        ticks: { color: '#9CA3AF' },
+                        grid: { color: '#374151' }
+                    }
+                }
+            };
+
+            if (conversionChart) conversionChart.destroy();
+            if (trendChart) trendChart.destroy();
+
+            conversionChart = new Chart(document.getElementById('conversionChart'), {
+                type: 'bar',
+                data: conversionData,
+                options: chartOptions
+            });
+
+            trendChart = new Chart(document.getElementById('trendChart'), {
+                type: 'line',
+                data: trendData,
+                options: chartOptions
+            });
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                startAnalysis();
+            }
+        });
+    </script>
+</body>
+</html>
