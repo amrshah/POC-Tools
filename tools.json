@@ -2,34 +2,39 @@
 {
     "name": "AI Strategy Suggestion Tool",
     "description": "A tool that suggests AI strategies for a given challenge in your business.",
-    "link": "./tools/ai-strategy-suggestion/"
+    "link": "./tools/ai-strategy-suggestion/",
+    "icon": "fa-solid fa-lightbulb"
   },
   {
       "name": "AI Strategy Suggestion Tool (Multilingual)",
       "description": "A tool that suggests AI strategies for a given challenge in your business, supporting multiple languages including Urdu.",
-      "link": "./tools/ai-strategy-suggestion/index-multilingual.html"
+      "link": "./tools/ai-strategy-suggestion/index-multilingual.html",
+      "icon": "fa-solid fa-lightbulb"
   },
       {
       "name": "AI Landing Page Optimizer",
       "description": "Analyze landing pages and get AI-powered optimization suggestions with predicted conversion improvements",
       "link": "tools/ai-landing-optimizer/",
       "category": "AI/Marketing",
-      "icon": "✨"
+      "icon": "fa-solid fa-rocket"
     },
 
   {
     "name": "Image Optimizer",
     "description": "A simple client-side image compression tool using Canvas API.",
-    "link": "./tools/image-optimizer/"
+    "link": "./tools/image-optimizer/",
+    "icon": "fa-solid fa-image"
   },
   {
     "name": "QR Generator",
     "description": "Generate and customize QR codes instantly.",
-    "link": "./tools/qr-generator/"
+    "link": "./tools/qr-generator/",
+    "icon": "fa-solid fa-qrcode"
   },
   {
     "name": "Markdown Previewer",
     "description": "Real-time Markdown to HTML converter.",
-    "link": "./tools/markdown-previewer/"
+    "link": "./tools/markdown-previewer/",
+    "icon": "fa-solid fa-file-markdown"
   }
 ]
