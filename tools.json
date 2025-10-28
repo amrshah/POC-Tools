@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Image Optimizer",
+    "description": "A simple client-side image compression tool using Canvas API.",
+    "link": "./tools/image-optimizer/"
+  },
+  {
+    "name": "QR Generator",
+    "description": "Generate and customize QR codes instantly.",
+    "link": "./tools/qr-generator/"
+  },
+  {
+    "name": "Markdown Previewer",
+    "description": "Real-time Markdown to HTML converter.",
+    "link": "./tools/markdown-previewer/"
+  }
+]
