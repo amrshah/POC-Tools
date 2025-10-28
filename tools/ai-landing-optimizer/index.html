@@ -301,15 +301,17 @@
             document.getElementById('analyzeBtn').disabled = true;
 
             try {
-                // Step 1: Fetch page content (simulated - in production we'd use a CORS proxy)
-                await updateProgress(20, 'Fetching page content...', 'Retrieving HTML and analyzing structure...');
+                // Step 1: Fetch page content using CORS proxy
+                await updateProgress(20, 'Fetching page content...', 'Retrieving HTML from URL...');
+                const pageContent = await fetchPageContent(urlInput);
                 
                 // Step 2: Extract key elements
-                await updateProgress(40, 'Analyzing content...', 'Extracting headlines, CTAs, and value propositions...');
+                await updateProgress(40, 'Analyzing content...', 'Extracting headlines, CTAs, and key elements...');
+                const extractedData = extractPageElements(pageContent);
                 
                 // Step 3: Call Gemini AI for analysis
                 await updateProgress(60, 'AI Analysis...', 'Generating persona-based optimizations...');
-                const aiResult = await analyzeWithGemini(urlInput);
+                const aiResult = await analyzeWithGemini(urlInput, extractedData);
                 
                 // Step 4: Process results
                 await updateProgress(80, 'Processing variations...', 'Creating optimized versions...');
@@ -323,31 +325,109 @@
                 
             } catch (error) {
                 console.error('Analysis failed:', error);
-                showError(error.message || 'Failed to analyze the page. Please try again.');
+                showError(error.message || 'Failed to analyze the page. Please check the URL and try again.');
             }
         }
 
-        async function analyzeWithGemini(url) {
-            const systemPrompt = `You are an expert conversion rate optimization specialist. Analyze the given landing page URL and provide optimization recommendations for 3 different visitor personas:
+        async function fetchPageContent(url) {
+            try {
+                // Use CORS proxy to fetch the page
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+                const response = await fetch(proxyUrl);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch page content');
+                }
+                
+                const html = await response.text();
+                return html;
+            } catch (error) {
+                throw new Error('Unable to fetch page. Please ensure the URL is accessible.');
+            }
+        }
+
+        function extractPageElements(html) {
+            // Create a temporary DOM element to parse HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Extract key elements
+            let headline = '';
+            let subheadline = '';
+            let cta = '';
+            let features = [];
+            
+            // Try to find headline (h1)
+            const h1 = doc.querySelector('h1');
+            if (h1) headline = h1.textContent.trim();
+            
+            // Try to find subheadline (first h2 or large p)
+            const h2 = doc.querySelector('h2');
+            if (h2) subheadline = h2.textContent.trim();
+            
+            // Try to find CTA button
+            const ctaBtn = doc.querySelector('a[class*="btn"], a[class*="button"], button[class*="cta"]');
+            if (ctaBtn) cta = ctaBtn.textContent.trim();
+            
+            // Extract features/benefits (look for lists, feature sections)
+            const featureElements = doc.querySelectorAll('li, [class*="feature"], [class*="benefit"]');
+            featureElements.forEach((el, idx) => {
+                if (idx < 8 && el.textContent.trim().length > 10 && el.textContent.trim().length < 100) {
+                    features.push(el.textContent.trim());
+                }
+            });
+            
+            // Get meta description as backup
+            const metaDesc = doc.querySelector('meta[name="description"]');
+            if (!subheadline && metaDesc) {
+                subheadline = metaDesc.getAttribute('content') || '';
+            }
+            
+            // Get page title as backup
+            const title = doc.querySelector('title');
+            if (!headline && title) {
+                headline = title.textContent.trim();
+            }
+            
+            return {
+                headline: headline || 'Professional Services',
+                subheadline: subheadline || 'Quality solutions for your business',
+                cta: cta || 'Get Started',
+                features: features.slice(0, 6),
+                fullText: doc.body.textContent.substring(0, 2000) // First 2000 chars for context
+            };
+        }
+
+        async function analyzeWithGemini(url, extractedData) {
+            const systemPrompt = `You are an expert conversion rate optimization specialist. You have been provided with actual content extracted from a landing page. Analyze the REAL content provided and create optimization recommendations for 3 different visitor personas:
 
 1. Price-Conscious: Visitors focused on cost, value, and ROI
-2. Feature-Focused: Technical buyers evaluating capabilities
+2. Feature-Focused: Technical buyers evaluating capabilities  
 3. Urgency-Driven: Decision-makers looking for quick solutions
 
-For the ORIGINAL page, identify current issues. For each persona variation, provide optimized copy that would resonate with that audience.
+For the ORIGINAL page analysis, use the ACTUAL content provided. For each persona variation, create optimized versions that would resonate with that specific audience while maintaining the core message.
 
-Be specific, actionable, and focus on elements that directly impact conversion: headlines, subheadlines, CTAs, and key benefits.`;
+Be specific and base your recommendations on the actual page content provided.`;
 
-            const userQuery = `Analyze this landing page and provide optimization recommendations: ${url}
+            const userQuery = `Analyze this landing page: ${url}
+
+ACTUAL PAGE CONTENT EXTRACTED:
+- Current Headline: "${extractedData.headline}"
+- Current Subheadline: "${extractedData.subheadline}"
+- Current CTA: "${extractedData.cta}"
+- Current Features/Benefits: ${extractedData.features.join(', ')}
+
+Page Context: ${extractedData.fullText.substring(0, 1000)}
 
 For each variation (original + 3 personas), provide:
-- A compelling headline
-- A persuasive subheadline
-- An action-oriented CTA button text
+- An optimized headline (keep original for "original" version)
+- An optimized subheadline
+- An optimized CTA button text
 - 4 key benefits/features to highlight
-- Predicted conversion rate (as a number between 1-10)
+- Predicted conversion rate (realistic number between 1.5-8.0 based on quality)
 - Engagement score (0-100)
-- List of issues (for original) or improvements (for variations)`;
+- For original: list specific issues you identified in the actual content
+- For variations: list specific improvements made to the actual content`;
 
             const responseSchema = {
                 type: "OBJECT",
@@ -355,14 +435,15 @@ For each variation (original + 3 personas), provide:
                     "original": {
                         type: "OBJECT",
                         properties: {
-                            headline: { type: "STRING" },
-                            subheadline: { type: "STRING" },
-                            cta: { type: "STRING" },
-                            features: { type: "ARRAY", items: { type: "STRING" } },
-                            conversionRate: { type: "NUMBER" },
-                            engagementScore: { type: "NUMBER" },
-                            issues: { type: "ARRAY", items: { type: "STRING" } }
-                        }
+                            headline: { type: "STRING", description: "The actual current headline from the page" },
+                            subheadline: { type: "STRING", description: "The actual current subheadline" },
+                            cta: { type: "STRING", description: "The actual current CTA text" },
+                            features: { type: "ARRAY", items: { type: "STRING" }, description: "4 current features from the page" },
+                            conversionRate: { type: "NUMBER", description: "Predicted rate between 1.5-8.0" },
+                            engagementScore: { type: "NUMBER", description: "Score 0-100" },
+                            issues: { type: "ARRAY", items: { type: "STRING" }, description: "Specific issues in the actual content" }
+                        },
+                        required: ["headline", "subheadline", "cta", "features", "conversionRate", "engagementScore", "issues"]
                     },
                     "priceOptimized": {
                         type: "OBJECT",
@@ -374,7 +455,8 @@ For each variation (original + 3 personas), provide:
                             conversionRate: { type: "NUMBER" },
                             engagementScore: { type: "NUMBER" },
                             improvements: { type: "ARRAY", items: { type: "STRING" } }
-                        }
+                        },
+                        required: ["headline", "subheadline", "cta", "features", "conversionRate", "engagementScore", "improvements"]
                     },
                     "techFocused": {
                         type: "OBJECT",
@@ -386,7 +468,8 @@ For each variation (original + 3 personas), provide:
                             conversionRate: { type: "NUMBER" },
                             engagementScore: { type: "NUMBER" },
                             improvements: { type: "ARRAY", items: { type: "STRING" } }
-                        }
+                        },
+                        required: ["headline", "subheadline", "cta", "features", "conversionRate", "engagementScore", "improvements"]
                     },
                     "urgencyDriven": {
                         type: "OBJECT",
@@ -398,9 +481,11 @@ For each variation (original + 3 personas), provide:
                             conversionRate: { type: "NUMBER" },
                             engagementScore: { type: "NUMBER" },
                             improvements: { type: "ARRAY", items: { type: "STRING" } }
-                        }
+                        },
+                        required: ["headline", "subheadline", "cta", "features", "conversionRate", "engagementScore", "improvements"]
                     }
-                }
+                },
+                required: ["original", "priceOptimized", "techFocused", "urgencyDriven"]
             };
 
             const payload = {
