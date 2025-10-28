@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM Strategy AI Consultant (Structured)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for better look */
+        #response-output::-webkit-scrollbar { width: 8px; }
+        #response-output::-webkit-scrollbar-thumb { background-color: #6366f1; border-radius: 4px; }
+        #response-output::-webkit-scrollbar-track { background-color: #f1f1f1; }
+        
+        /* Ensures the rationale text flows correctly regardless of direction */
+        .rationale-text {
+            border-style: solid;
+            border-width: 0 0 0 4px; /* Default LTR border-left */
+            padding-left: 2rem;
+            padding-right: 0;
+            border-color: #6366f1; /* indigo-500 */
+        }
+        
+        /* RTL adjustments */
+        body[dir="rtl"] .rationale-text {
+            border-width: 0 4px 0 0; /* Flip to border-right */
+            padding-right: 2rem;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 font-sans">
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-xl p-8 space-y-6">
+        
+        <!-- Language Switcher -->
+        <div class="flex justify-end mb-4">
+            <select id="language-switcher" onchange="switchLanguage(this.value)" 
+                class="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out">
+                <option value="en">English (EN)</option>
+                <option value="ur">اردو (UR)</option>
+                <option value="ar">العربية (AR)</option>
+            </select>
+        </div>
+
+        <h1 id="main-title" class="text-3xl font-bold text-center text-indigo-700">
+            SAM Strategy AI: Local Business Consultant
+        </h1>
+        <p id="description-text" class="text-center text-sm text-gray-500">
+            Ask for a strategy. The AI will respond as an expert, delivering structured, actionable recommendations.
+        </p>
+        
+        <div class="space-y-4">
+            <label id="label-business" for="business-input" class="block text-sm font-medium text-gray-700">1. Your Business Type (e.g., Laptop Repairs):</label>
+            <input type="text" id="business-input" value="Laptop Repairs"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out">
+            
+            <label id="label-goal" for="goal-input" class="block text-sm font-medium text-gray-700">2. Your Immediate Goal (e.g., I need a website):</label>
+            <textarea id="goal-input" rows="2"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out resize-none">I need a website for my laptop repair business</textarea>
+
+            <button id="submit-button"
+                class="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-150 ease-in-out disabled:opacity-50"
+                onclick="generateStrategy()">
+                Get Expert Strategy
+            </button>
+        </div>
+
+        <div class="relative pt-6">
+            <h2 id="recommendations-title" class="text-xl font-semibold text-gray-700 mb-3 border-b pb-2">Top Recommendations</h2>
+            <div id="loading-indicator" class="text-center hidden text-indigo-500 font-medium py-4">
+                SAM Strategy AI is analyzing the market...
+            </div>
+            <div id="response-output" 
+                class="min-h-[150px] bg-white text-gray-800">
+                Enter your business details and goal above to receive a tailored 3-point strategy.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //our deployed Cloudflare Worker endpoint!
+        const API_PROXY_URL = "https://gemini-api-keys.amr-shah.workers.dev"; 
+        
+        const businessInput = document.getElementById('business-input');
+        const goalInput = document.getElementById('goal-input');
+        const responseOutput = document.getElementById('response-output');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const submitButton = document.getElementById('submit-button');
+
+        // --- Multi-Language Support Configuration ---
+        const LANGUAGES = {
+            'en': {
+                langName: "English",
+                title: "SAM Strategy AI: Local Business Consultant",
+                description: "Ask for a strategy. The AI will respond as an expert, delivering structured, actionable recommendations.",
+                label1: "1. Your Business Type (e.g., Laptop Repairs):",
+                label2: "2. Your Immediate Goal (e.g., I need a website):",
+                button: "Get Expert Strategy",
+                recommendationsTitle: "Top Recommendations",
+                initialText: "Enter your business details and goal above to receive a tailored 3-point strategy.",
+                loading: "SAM Strategy AI is analyzing the market...",
+                placeholderBusiness: "Laptop Repairs",
+                placeholderGoal: "I need a website for my laptop repair business",
+                errorInput: "Please fill in both the business type and the goal.",
+                errorProxy: "ERROR: Please update the 'API_PROXY_URL' in the script to your deployed worker endpoint.",
+                errorGeneric: "An error occurred: ",
+                errorJSON: "AI returned an invalid JSON structure. Raw response:",
+                errorNoContent: "Could not generate strategy. Check worker logs for details."
+            },
+            'ur': {
+                langName: "Urdu",
+                title: "SAM اسٹریٹیجی AI: مقامی کاروباری مشیر",
+                description: "ایک حکمت عملی پوچھیں۔ AI ایک ماہر کے طور پر جواب دے گا، منظم، قابل عمل سفارشات فراہم کرے گا۔",
+                label1: "1. آپ کے کاروبار کی قسم (مثال کے طور پر، لیپ ٹاپ مرمت):",
+                label2: "2. آپ کا فوری ہدف (مثال کے طور پر، مجھے ایک ویب سائٹ چاہیے):",
+                button: "ماہرانہ حکمت عملی حاصل کریں",
+                recommendationsTitle: "اہم سفارشات",
+                initialText: "اپنی کاروبار کی تفصیلات اور ہدف درج کریں تاکہ ایک موزوں 3-نکاتی حکمت عملی حاصل کی جا سکے۔",
+                loading: "SAM اسٹریٹیجی AI مارکیٹ کا تجزیہ کر رہا ہے...",
+                placeholderBusiness: "لیپ ٹاپ مرمت",
+                placeholderGoal: "مجھے اپنے لیپ ٹاپ مرمت کے کاروبار کے لیے ایک ویب سائٹ چاہیے۔",
+                errorInput: "براہ کرم کاروبار کی قسم اور ہدف دونوں پُر کریں۔",
+                errorProxy: "خرابی: براہ کرم سکرپٹ میں 'API_PROXY_URL' کو اپنے تعینات ورکر اینڈ پوائنٹ سے اپ ڈیٹ کریں۔",
+                errorGeneric: "ایک خرابی واقع ہوئی ہے: ",
+                errorJSON: "AI نے غلط JSON ساخت واپس کی ہے۔ خام جواب:",
+                errorNoContent: "حکمت عملی تیار نہیں ہو سکی۔ تفصیلات کے لیے ورکر لاگز چیک کریں۔"
+            },
+            'ar': {
+                langName: "Arabic",
+                title: "مستشار استراتيجية SAM AI: مستشار الأعمال المحلية",
+                description: "اطلب استراتيجية. سيستجيب الذكاء الاصطناعي كخبير، مقدماً توصيات منظمة وقابلة للتطبيق.",
+                label1: "1. نوع عملك (على سبيل المثال، إصلاح أجهزة الكمبيوتر المحمول):",
+                label2: "2. هدفك الفوري (على سبيل المثال، أحتاج إلى موقع ويب):",
+                button: "احصل على استراتيجية الخبراء",
+                recommendationsTitle: "أهم التوصيات",
+                initialText: "أدخل تفاصيل عملك وهدفك أعلاه للحصول على استراتيجية مخصصة من 3 نقاط.",
+                loading: "مستشار استراتيجية SAM AI يحلل السوق...",
+                placeholderBusiness: "إصلاح أجهزة الكمبيوتر المحمول",
+                placeholderGoal: "أحتاج إلى موقع ويب لعملي في إصلاح أجهزة الكمبيوتر المحمول",
+                errorInput: "الرجاء ملء كل من نوع العمل والهدف.",
+                errorProxy: "خطأ: الرجاء تحديث 'API_PROXY_URL' في السكربت إلى نقطة نهاية العامل الموزعة لديك.",
+                errorGeneric: "حدث خطأ: ",
+                errorJSON: "أعاد الذكاء الاصطناعي بنية JSON غير صالحة. الرد الخام:",
+                errorNoContent: "تعذر إنشاء استراتيجية. تحقق من سجلات العامل للحصول على التفاصيل."
+            }
+        };
+        
+        let currentLang = 'en'; // Default language
+
+        // Function to update all static UI text
+        function updateUI() {
+            const L = LANGUAGES[currentLang];
+            
+            document.getElementById('main-title').textContent = L.title;
+            document.getElementById('description-text').textContent = L.description;
+            
+            document.getElementById('label-business').textContent = L.label1;
+            businessInput.placeholder = L.placeholderBusiness;
+            
+            document.getElementById('label-goal').textContent = L.label2;
+            goalInput.placeholder = L.placeholderGoal;
+
+            submitButton.textContent = L.button;
+            document.getElementById('recommendations-title').textContent = L.recommendationsTitle;
+            loadingIndicator.textContent = L.loading;
+            
+            // Only update initial text if response-output is empty or showing an initial message
+            if (responseOutput.children.length === 0 || responseOutput.textContent.includes('strategy') || responseOutput.textContent.includes('حكمة') || responseOutput.textContent.includes('استراتيجي')) {
+                responseOutput.innerHTML = L.initialText;
+            }
+        }
+
+        // Function to handle language switching
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const body = document.body;
+            
+            // Set text direction (RTL for Arabic/Urdu)
+            if (lang === 'ar' || lang === 'ur') {
+                body.dir = 'rtl';
+            } else {
+                body.dir = 'ltr';
+            }
+            
+            // Update all visible text
+            updateUI();
+        }
+
+        // This function handles the JSON response from the worker/Gemini API
+        function renderRecommendations(recommendations) {
+            let html = '<div class="space-y-6">';
+            
+            recommendations.sort((a, b) => a.rank - b.rank); // Sort by rank/priority
+            
+            const rationaleClasses = document.body.dir === 'rtl' 
+                ? "mt-2 text-gray-600 rationale-text" // CSS handles the right-border and padding
+                : "mt-2 text-gray-600 rationale-text";
+
+            recommendations.forEach(item => {
+                html += `
+                    <div class="p-4 bg-white border border-indigo-200 rounded-lg shadow-md">
+                        <div class="flex items-center space-x-3 ${document.body.dir === 'rtl' ? 'flex-row-reverse space-x-reverse' : ''}">
+                            <span class="text-3xl font-extrabold text-indigo-600">${item.rank}.</span>
+                            <h3 class="text-xl font-bold text-gray-900">${item.title}</h3>
+                        </div>
+                        <p class="${rationaleClasses}">
+                            ${item.rationale}
+                        </p>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            responseOutput.innerHTML = html;
+        }
+
+        async function generateStrategy() {
+            const L = LANGUAGES[currentLang]; // Get current language strings
+            const business = businessInput.value.trim();
+            const goal = goalInput.value.trim();
+            const userQuery = `Business: ${business}. Goal: ${goal}`;
+
+            if (!business || !goal) {
+                responseOutput.innerHTML = `<div class="text-red-500 font-medium p-4">${L.errorInput}</div>`;
+                return;
+            }
+
+            if (API_PROXY_URL === "YOUR_CLOUDFLARE_WORKER_URL_HERE") {
+                responseOutput.innerHTML = `<div class="text-red-500 font-medium p-4">${L.errorProxy}</div>`;
+                return;
+            }
+
+            responseOutput.innerHTML = '';
+            loadingIndicator.classList.remove('hidden');
+            submitButton.disabled = true;
+
+            // --- 1. Define Persona (System Instruction) ---
+            const targetLanguage = LANGUAGES[currentLang].langName;
+            const systemPrompt = `You are 'SAM Strategy AI,' an elite consultant specializing in small to medium-sized local service businesses. Analyze the user's business and goal and provide a structured, prioritized list of the top 3 tactical recommendations. Your tone must be concise, expert, and actionable, focusing on maximizing local search visibility and converting high-intent local traffic. Crucially, respond entirely in ${targetLanguage}. Never use the word 'template' or 'general.'`;
+            
+            // --- 2. Define Structured Output (JSON Schema) ---
+            const responseSchema = {
+                type: "ARRAY",
+                description: "A list of the top 3 strategy recommendations.",
+                items: {
+                    type: "OBJECT",
+                    properties: {
+                        "rank": { "type": "NUMBER", "description": "The priority rank (1, 2, or 3, where 1 is highest priority)." },
+                        "title": { "type": "STRING", "description": "A short, actionable title for the recommendation, e.g., 'Optimize Google Business Profile.'" },
+                        "rationale": { "type": "STRING", "description": "A concise, 1-2 sentence justification tailored to the user's specific business and goal." }
+                    },
+                    required: ["rank", "title", "rationale"]
+                }
+            };
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: responseSchema
+                }
+            };
+            
+            try {
+                // Exponential Backoff implementation (omitted for brevity, assume fetch handles it or is not required for this demo)
+                const response = await fetch(API_PROXY_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Proxy error: ${response.status} ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (jsonText) {
+                    try {
+                        const recommendations = JSON.parse(jsonText);
+                        renderRecommendations(recommendations);
+                    } catch (e) {
+                        responseOutput.innerHTML = `<div class="text-red-500 p-4">${L.errorJSON} ${jsonText}</div>`;
+                        console.error("JSON parsing error:", e, jsonText);
+                    }
+                } else {
+                    responseOutput.innerHTML = `<div class="text-red-500 p-4">${L.errorNoContent}</div>`;
+                }
+
+            } catch (error) {
+                console.error("Strategy generation failed:", error);
+                responseOutput.innerHTML = `<div class="text-red-500 p-4">${L.errorGeneric} ${error.message}.</div>`;
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                submitButton.disabled = false;
+            }
+        }
+
+        // Initialize UI on load
+        window.onload = () => {
+            updateUI();
+            // Also call switchLanguage on initial load to set LTR/RTL correctly based on default 'en'
+            switchLanguage('en'); 
+        };
+    </script>
+</body>
+</html>
