@@ -278,7 +278,7 @@
     </div>
 
     <script>
-        const API_PROXY_URL = "https://gemini-api-keys.amr-shah.workers.dev";
+        const API_PROXY_URL = "https://my-ai-models.amr-shah.workers.dev";
         let analysisData = null;
         let currentPersona = 'original';
         let userUrl = '';
@@ -301,7 +301,7 @@
             document.getElementById('analyzeBtn').disabled = true;
 
             try {
-                // Step 1: Fetch page content (simulated - in production you'd use a CORS proxy)
+                // Step 1: Fetch page content (simulated - in production we'd use a CORS proxy)
                 await updateProgress(20, 'Fetching page content...', 'Retrieving HTML and analyzing structure...');
                 
                 // Step 2: Extract key elements
