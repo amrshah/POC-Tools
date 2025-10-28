@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAM Strategy AI Consultant (Structured)</title>
+    <title>AI Strategy Consultant</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -62,8 +62,8 @@
     </div>
 
     <script>
-        // CRITICAL: Replace this with the URL of your deployed Cloudflare Worker endpoint!
-        const API_PROXY_URL = "YOUR_CLOUDFLARE_WORKER_URL_HERE"; 
+        // our deployed Cloudflare Worker endpoint!
+        const API_PROXY_URL = "https://gemini-api-keys.amr-shah.workers.dev"; 
         
         const businessInput = document.getElementById('business-input');
         const goalInput = document.getElementById('goal-input');
@@ -71,7 +71,7 @@
         const loadingIndicator = document.getElementById('loading-indicator');
         const submitButton = document.getElementById('submit-button');
 
-        // This function handles the JSON response from the worker/Gemini API
+        // handle the JSON response from the worker/Gemini API
         function renderRecommendations(recommendations) {
             let html = '<div class="space-y-6">';
             
@@ -105,7 +105,7 @@
                 return;
             }
 
-            if (API_PROXY_URL === "https://gemini-api-keys.amr-shah.workers.dev") {
+            if (API_PROXY_URL === "YOUR_CLOUDFLARE_WORKER_URL_HERE") {
                 responseOutput.innerHTML = '<div class="text-red-500 font-medium p-4">ERROR: Please update the \'API_PROXY_URL\' in the script to your deployed worker endpoint.</div>';
                 return;
             }
@@ -114,10 +114,10 @@
             loadingIndicator.classList.remove('hidden');
             submitButton.disabled = true;
 
-            // --- 1. Define Persona (System Instruction) ---
-            const systemPrompt = `You are 'SAM Strategy AI,' an elite consultant specializing in small to medium-sized local service businesses. Analyze the user's business and goal and provide a structured, prioritized list of the top 3 tactical recommendations. Your tone must be concise, expert, and actionable, focusing on maximizing local search visibility and converting high-intent local traffic. Never use the word 'template' or 'general.'`;
+            // --- 1. AI Persona (System Instruction) ---
+            const systemPrompt = `You are 'Silver Ant Marketing Strategy AI,' an elite consultant specializing in small to medium-sized local service businesses. Analyze the user's business and goal and provide a structured, prioritized list of the top 3 tactical recommendations. Your tone must be concise, expert, and actionable, focusing on maximizing local search visibility and converting high-intent local traffic. Never use the word 'template' or 'general.'`;
             
-            // --- 2. Define Structured Output (JSON Schema) ---
+            // --- 2. AI Structured Output (JSON Schema) ---
             const responseSchema = {
                 type: "ARRAY",
                 description: "A list of the top 3 strategy recommendations.",
