@@ -157,6 +157,15 @@
         };
         
         let currentLang = 'en'; // Default language
+        let languageInstruction = `Crucially, respond entirely in ${currentLang}.`;
+            
+            // Explicitly instruct the model to use the proper script to prevent Romanization
+            if (currentLang === 'ur') {
+                languageInstruction = `Crucially, respond entirely in Urdu using the standard Nastaliq script (not Roman Urdu).`;
+            } else if (currentLang === 'ar') {
+                languageInstruction = `Crucially, respond entirely in Arabic using the standard Arabic script.`;
+            }
+
 
         // Function to update all static UI text
         function updateUI() {
