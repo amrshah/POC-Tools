@@ -329,7 +329,7 @@
 
         async function fetchPageContent(url) {
             try {
-                const response = await fetch('https://gemini-api-keys.amr-shah.workers.dev/scrape', {
+                const response = await fetch('https://my-scraper.amr-shah.workers.dev/scrape', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ targetUrl: url })
