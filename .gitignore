@@ -1,3 +1,4 @@
 # Ignore Cloudflare configuration files
 .cloudflare/
 /.cloudflare-worker
+tools/ai-strategy-suggestion/.ideas
