@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Ant Marketing - Drive Growth with Smart Marketing (AI Powered)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark-bg: #0d0d0d;
+            --color-dark-surface: #1a1a1a;
+            --color-accent-blue: #0070c0;
+            --color-text-light: #f3f4f6;
+            --color-silver: #a0a0a0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+            scroll-behavior: smooth;
+        }
+        .section-header {
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            letter-spacing: 0.1em;
+            font-size: 0.875rem; /* sm */
+        }
+        .main-cta-button {
+            background-color: var(--color-accent-blue);
+            transition: all 0.3s ease;
+        }
+        .main-cta-button:hover {
+            background-color: #005aa3;
+            box-shadow: 0 10px 15px -3px rgba(0, 112, 192, 0.5), 0 4px 6px -2px rgba(0, 112, 192, 0.05);
+        }
+        .ai-sparkle-button {
+            background-color: #f59e0b; /* Amber */
+            color: #1f2937; /* Dark text for contrast */
+            transition: all 0.2s ease;
+        }
+        .ai-sparkle-button:hover {
+            background-color: #d97706;
+            box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.5);
+        }
+        .loading-ring {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo: Enhanced to use accent color -->
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-black text-[var(--color-accent-blue)] rounded-lg py-2 px-3 bg-gray-800 border border-gray-700">
+                        SAM <span class="text-sm font-normal text-gray-400 tracking-widest">DIGITAL</span>
+                    </span>
+                </div>
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex lg:space-x-8 items-center">
+                    <a href="#hero" class="text-gray-300 hover:text-[var(--color-accent-blue)] transition duration-150 text-sm font-medium">Home</a>
+                    <a href="#capabilities" class="text-gray-300 hover:text-[var(--color-accent-blue)] transition duration-150 text-sm font-medium">Capabilities</a>
+                    <a href="#about" class="text-gray-300 hover:text-[var(--color-accent-blue)] transition duration-150 text-sm font-medium">About Us</a>
+                    <a href="#clients" class="text-gray-300 hover:text-[var(--color-accent-blue)] transition duration-150 text-sm font-medium">Clients</a>
+                    <a href="#contact" class="main-cta-button text-white font-semibold py-2 px-6 rounded-full text-sm shadow-lg">
+                        Let's Talk
+                    </a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-400 hover:text-white rounded-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-gray-900 border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#hero" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-800">Home</a>
+                <a href="#capabilities" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white">Capabilities</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white">About Us</a>
+                <a href="#clients" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white">Clients</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium main-cta-button text-white">Let's Talk</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section id="hero" class="relative overflow-hidden pt-16 pb-24 sm:pt-24 lg:pt-32 lg:pb-48">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+                    <div class="lg:col-span-6 xl:col-span-7">
+                        <p class="section-header mb-4 text-center lg:text-left">Silver Ant Marketing</p>
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-8 text-center lg:text-left">
+                            Award-Winning Digital Marketing Driving Growth & Sales!
+                        </h1>
+                        <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
+                            Tired of pouring time and money into marketing that doesn’t deliver? We make it simple: real results, no gimmicks. Silver Ant Marketing helps you drive revenue and see real results!
+                        </p>
+
+                        <!-- Stats and CTA -->
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center lg:justify-start">
+                            <a href="#contact" class="main-cta-button text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl text-center">
+                                Get a Free Proposal
+                            </a>
+                            <a href="#capabilities" class="bg-gray-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:bg-gray-600 transition duration-300 text-center">
+                                See Our Services
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-6 xl:col-span-5 mt-16 lg:mt-0 relative">
+                        <!-- Placeholder for the main illustration/team image -->
+                        <div class="w-full max-w-md mx-auto aspect-[4/3] bg-gray-800 rounded-xl shadow-2xl p-6 flex flex-col justify-center items-center border border-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-gray-500 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a10 10 0 0 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 4V20"/><path d="M4.6 9l14.8 6M4.6 15l14.8-6"/>
+                            </svg>
+                            <p class="text-gray-400 text-center">Digital Growth Illustration Placeholder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Trust Bar / Awards & Stats -->
+        <section class="bg-gray-900 py-12 border-t border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-bold text-white mb-1">$823M+</span>
+                        <span class="text-gray-400 text-sm">Revenue Generated</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-bold text-white mb-1">95%</span>
+                        <span class="text-gray-400 text-sm">Client Satisfaction Rate</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-bold text-white mb-1">7+</span>
+                        <span class="text-gray-400 text-sm">Years of Experience</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-bold text-white mb-1">400+</span>
+                        <span class="text-gray-400 text-sm">Digital Experts</span>
+                    </div>
+                </div>
+                <!-- Badges Placeholder -->
+                <div class="mt-12 flex flex-wrap justify-center items-center gap-6 opacity-70">
+                    <span class="text-gray-500 text-xs uppercase tracking-wider">Featured on:</span>
+                    <span class="text-gray-500 font-semibold">Clutch Badge</span>
+                    <span class="text-gray-500 font-semibold">Google Partner</span>
+                    <span class="text-gray-500 font-semibold">Shopify Partner</span>
+                    <span class="text-gray-500 font-semibold">Trustpilot</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Our Clients -->
+        <section id="clients" class="py-20 lg:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="section-header mb-2 text-white">Trusted Partners in Your Success</p>
+                <h2 class="text-4xl font-extrabold text-white mb-8">Our Clients</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
+                    With our team’s expertise and creative strategies, we’ll help your business unlock its true potential, driving steady growth and boosting profits along the way.
+                </p>
+
+                <!-- Client Logos Placeholder -->
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-8 items-center justify-center opacity-70 mb-12">
+                    <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center text-gray-500 text-sm">Client A</div>
+                    <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center text-gray-500 text-sm">Client B</div>
+                    <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center text-gray-500 text-sm">Client C</div>
+                    <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center text-gray-500 text-sm hidden md:flex">Client D</div>
+                    <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center text-gray-500 text-sm hidden md:flex">Client E</div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
+                    <a href="#contact" class="main-cta-button text-white font-semibold py-3 px-8 rounded-full shadow-lg text-center">
+                        Grow with Us
+                    </a>
+                    <a href="#" class="bg-gray-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-600 transition duration-300 text-center">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Service Capabilities Overview -->
+        <section id="capabilities" class="bg-[var(--color-dark-surface)] py-20 lg:py-32 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="section-header mb-2">Comprehensive Digital Solutions</p>
+                    <h2 class="text-4xl font-extrabold text-white mb-4">Elevate Your Online Presence with SAM</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-16">
+                        Silver Ant Marketing offers a suite of services, including SEO, PPC, SMM, Web Design, and more, to enhance your online presence. Our proven Digital Growth approach gets results.
+                    </p>
+                </div>
+
+                <!-- NEW: AI Strategy Suggestor Block -->
+                <div class="max-w-4xl mx-auto bg-gray-900 p-8 rounded-xl shadow-2xl border border-gray-700 mb-16">
+                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center justify-center text-center">
+                        <span class="mr-2">✨</span> Get an Instant Strategy Suggestion
+                    </h3>
+                    <p class="text-gray-400 mb-6 text-center text-sm">Tell our AI Strategist about your business and challenge, and get a personalized top-3 service recommendation.</p>
+
+                    <div class="space-y-4">
+                        <input id="ai-business-input" type="text" placeholder="e.g., Eco-friendly dog treat subscription service" 
+                               class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-amber-500 focus:border-amber-500" required>
+                        <textarea id="ai-challenge-input" rows="2" placeholder="e.g., We have low social media engagement and our ads are too expensive." 
+                                  class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-amber-500 focus:border-amber-500" required></textarea>
+                    </div>
+
+                    <button id="strategy-suggestor-btn" class="ai-sparkle-button w-full text-white font-bold py-3 rounded-full mt-6 flex items-center justify-center">
+                        <span id="suggestor-text">✨ Analyze My Challenge</span>
+                        <div id="suggestor-loading" class="loading-ring hidden ml-3"></div>
+                    </button>
+                    
+                    <!-- AI Results Display -->
+                    <div id="strategy-results-container" class="mt-8 hidden p-6 bg-[var(--color-dark-surface)] rounded-lg border border-gray-700">
+                        <h4 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6m0 0h18v-6a2 2 0 00-2-2h-2a2 2 0 00-2 2v6m0 0H9m-2 0h10"></path></svg>
+                            SAM AI Top 3 Recommendations:
+                        </h4>
+                        <div id="strategy-recommendations" class="space-y-4">
+                            <!-- Recommendations will be injected here -->
+                        </div>
+                    </div>
+
+                    <p id="suggestor-error" class="text-red-400 mt-4 text-center hidden text-sm"></p>
+                </div>
+                <!-- END AI Strategy Suggestor Block -->
+                
+                <!-- Service Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1: SEO -->
+                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-[var(--color-accent-blue)] transition duration-300 shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v3zM3 10v7a2 2 0 002 2h14a2 2 0 002-2v-7m-9 4h6"></path></svg>
+                            SEO Services
+                        </h3>
+                        <p class="text-gray-400 mb-4">Boost your visibility and organic traffic. We focus on technical, local, and enterprise SEO to ensure long-term growth.</p>
+                        <ul class="list-disc list-inside text-gray-500 text-sm space-y-1">
+                            <li>5M+ Organic Visits Generated</li>
+                            <li>Ranking for 300K+ Keywords</li>
+                            <li>$20M+ Revenue Driven</li>
+                        </ul>
+                        <a href="#" class="inline-block mt-4 text-[var(--color-accent-blue)] font-medium hover:text-white transition duration-150">Explore More &rarr;</a>
+                    </div>
+                    
+                    <!-- Card 2: PPC -->
+                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-[var(--color-accent-blue)] transition duration-300 shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            PPC Services
+                        </h3>
+                        <p class="text-gray-400 mb-4">Maximize ROI with cutting-edge paid advertising strategies across Google, Bing, and various platforms.</p>
+                        <ul class="list-disc list-inside text-gray-500 text-sm space-y-1">
+                            <li>$15M+ in Ad Spend Managed</li>
+                            <li>Average 5x ROAS Achieved</li>
+                            <li>50K+ Leads from a single campaign</li>
+                        </ul>
+                        <a href="#" class="inline-block mt-4 text-[var(--color-accent-blue)] font-medium hover:text-white transition duration-150">Explore More &rarr;</a>
+                    </div>
+                    
+                    <!-- Card 3: SMM -->
+                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-[var(--color-accent-blue)] transition duration-300 shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-3h-5v3zm-3 0h5v-3h-5v3zm-5 0h5v-3h-5v3zm-5 0h5v-3H4v3zM12 4v4m-4-4v4m-4-4v4m16-4v4"></path></svg>
+                            SMM Services
+                        </h3>
+                        <p class="text-gray-400 mb-4">Boost social presence, engagement, and conversions across major platforms like Facebook, Instagram, and LinkedIn.</p>
+                        <ul class="list-disc list-inside text-gray-500 text-sm space-y-1">
+                            <li>85% Growth of Organic Reach</li>
+                            <li>10M+ Followers Managed</li>
+                            <li>$8M+ in Social Ad Spend</li>
+                        </ul>
+                        <a href="#" class="inline-block mt-4 text-[var(--color-accent-blue)] font-medium hover:text-white transition duration-150">Explore More &rarr;</a>
+                    </div>
+                    
+                    <!-- Card 4: Web Design & Dev -->
+                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-[var(--color-accent-blue)] transition duration-300 shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L12 20.25M14.25 17L12 20.25M18.75 17L21 20.25M5.25 17L3 20.25M21 17H3M19 8a2 2 0 012 2v7H3v-7a2 2 0 012-2h14zM12 4a3 3 0 100 6 3 3 0 000-6z"></path></svg>
+                            Web Design & Development
+                        </h3>
+                        <p class="text-gray-400 mb-4">We create professional, fully functional, and mobile-optimized websites that scale your site's performance.</p>
+                        <ul class="list-disc list-inside text-gray-500 text-sm space-y-1">
+                            <li>70% Increase in User Engagement</li>
+                            <li>Reduced Bounce Rates</li>
+                            <li>Seamless E-commerce Integration</li>
+                        </ul>
+                        <a href="#" class="inline-block mt-4 text-[var(--color-accent-blue)] font-medium hover:text-white transition duration-150">Explore More &rarr;</a>
+                    </div>
+
+                    <!-- Card 5: Graphic Design -->
+                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-[var(--color-accent-blue)] transition duration-300 shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13.5M3.251 18.25h17.5M3.251 5.75h17.5M6 12h12"></path></svg>
+                            Graphic Designing
+                        </h3>
+                        <p class="text-gray-400 mb-4">Unleash the full potential of your brand with eye-catching logos, product photos, and high-impact visual assets.</p>
+                        <ul class="list-disc list-inside text-gray-500 text-sm space-y-1">
+                            <li>Brand Identity Packages</li>
+                            <li>Infographics & Marketing Collateral</li>
+                            <li>High-Converting Landing Page Design</li>
+                        </ul>
+                        <a href="#" class="inline-block mt-4 text-[var(--color-accent-blue)] font-medium hover:text-white transition duration-150">Explore More &rarr;</a>
+                    </div>
+                    
+                    <!-- Card 6: Video Editing -->
+                    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-[var(--color-accent-blue)] transition duration-300 shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[var(--color-accent-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.683v6.634a1 1 0 01-1.447.894L15 14M5 18V6a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2z"></path></svg>
+                            Video Editing Services
+                        </h3>
+                        <p class="text-gray-400 mb-4">Professional video editing to capture attention, tell your brand story, and boost viewer retention and engagement.</p>
+                        <ul class="list-disc list-inside text-gray-500 text-sm space-y-1">
+                            <li>50% Increased Viewer Retention</li>
+                            <li>High-Impact Social Campaigns</li>
+                            <li>Enhanced Conversion Rates</li>
+                        </ul>
+                        <a href="#" class="inline-block mt-4 text-[var(--color-accent-blue)] font-medium hover:text-white transition duration-150">Explore More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Reviews and Case Studies -->
+        <section class="py-20 lg:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="section-header mb-2">Reviews</p>
+                    <h2 class="text-4xl font-extrabold text-white mb-4">Happy Clients & their Experience</h2>
+                    <div class="flex justify-center mb-12">
+                        <div class="w-12 h-1 bg-[var(--color-accent-blue)] rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Video Testimonials / Case Studies Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Case Study 1 -->
+                    <div class="bg-[var(--color-dark-surface)] rounded-xl p-6 shadow-xl border border-gray-800">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="w-full md:w-1/3 aspect-video bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-10 h-10 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-xl font-bold text-white mb-2">Outspoken Visions</h4>
+                                <p class="text-sm text-gray-400 mb-4">Since their joining in June 2020, we’ve spearheaded a dynamic SEO strategy that’s yielded remarkable results.</p>
+                                <ul class="text-sm text-gray-400 space-y-1">
+                                    <li><span class="font-semibold text-white">114%</span> surge in Organic Traffic</li>
+                                    <li>Leads skyrocketed by <span class="font-semibold text-white">84%</span></li>
+                                    <li>Domain Authority increased by <span class="font-semibold text-white">300%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 2 -->
+                    <div class="bg-[var(--color-dark-surface)] rounded-xl p-6 shadow-xl border border-gray-800">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="w-full md:w-1/3 aspect-video bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-10 h-10 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-xl font-bold text-white mb-2">Firefold PPC Maximize</h4>
+                                <p class="text-sm text-gray-400 mb-4">We maximized Firefold’s PPC potential and delivered tangible growth in a dynamic market landscape.</p>
+                                <ul class="text-sm text-gray-400 space-y-1">
+                                    <li>Cost per Conversion decreased by <span class="font-semibold text-white">$7.05</span></li>
+                                    <li>Conversions & Leads surged impressively by <span class="font-semibold text-white">87.92%</span></li>
+                                    <li>Achieved significant efficiency and savings</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 6. FAQ Section (Ant-themed Q&A) -->
+        <section id="about" class="bg-[var(--color-dark-surface)] py-20 lg:py-32 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="section-header mb-2">Ask Us Anything</p>
+                    <h2 class="text-4xl font-extrabold text-white mb-12">Frequently Asked Questions</h2>
+                </div>
+
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-lg font-semibold text-white mb-2">How does Silver Ant help businesses grow?</h3>
+                        <p class="text-gray-400">
+                            Like ants building their colony, Silver Ant builds your brand presence step by step, using data, strategy, and relentless effort. Our clients typically see a 30–50% increase in organic traffic within the first few months of consistent SEO, and targeted PPC campaigns can boost leads by up to 60%.
+                        </p>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-lg font-semibold text-white mb-2">Why choose Silver Ant?</h3>
+                        <p class="text-gray-400">
+                            Silver Ant isn’t just another agency, we’re your digital growth partners. Our team operates with ant-like discipline and collaboration to deliver results that matter. With a client retention rate of 92%, we believe in long-term partnerships, transparent processes, and marketing that actually moves the needle.
+                        </p>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-lg font-semibold text-white mb-2">How do I get started with Silver Ant?</h3>
+                        <p class="text-gray-400">
+                            Getting started is simple. Reach out via our contact form below, and we’ll schedule a free discovery call. From there, the Silver Ant team will craft a personalized digital strategy built around your goals, market, and budget, so you can start seeing progress, fast.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Contact Form Section -->
+        <section id="contact" class="py-20 lg:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p class="section-header mb-2">Contact Form</p>
+                    <h2 class="text-4xl font-extrabold text-white">Have questions? Get in touch!</h2>
+                </div>
+                
+                <div class="max-w-3xl mx-auto bg-[var(--color-dark-surface)] p-8 sm:p-12 rounded-xl shadow-2xl border border-gray-800">
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name *</label>
+                            <input type="text" name="name" id="name" required class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-[var(--color-accent-blue)] focus:border-[var(--color-accent-blue)] transition duration-150" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address *</label>
+                            <input type="email" name="email" id="email" required class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-[var(--color-accent-blue)] focus:border-[var(--color-accent-blue)] transition duration-150" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label for="goal-input" class="block text-sm font-medium text-gray-300 mb-1">Your Main Project Goal (for AI drafting)</label>
+                            <input type="text" id="goal-input" placeholder="e.g., I want to launch a new eco-friendly sneaker brand" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                        </div>
+                        
+                        <button type="button" id="draft-message-btn" class="ai-sparkle-button w-full text-white font-bold py-3 rounded-full text-base shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center">
+                            <span id="draft-text">✨ Draft My Introduction Message</span>
+                            <div id="draft-loading" class="loading-ring hidden ml-3"></div>
+                        </button>
+                        <p id="draft-error" class="text-red-400 text-center hidden text-sm"></p>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message *</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-[var(--color-accent-blue)] focus:border-[var(--color-accent-blue)] transition duration-150" placeholder="Tell us about your project goals..."></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="main-cta-button w-full text-white font-bold py-3 rounded-full text-lg shadow-xl hover:shadow-2xl transition duration-300">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-gray-800 pb-10 mb-10">
+                <!-- Col 1: Logo & Contact Info (Updated Logo style) -->
+                <div class="col-span-2 md:col-span-1">
+                    <span class="text-2xl font-black text-[var(--color-accent-blue)] rounded-lg py-2 px-3 bg-gray-800 border border-gray-700">SAM</span>
+                    <p class="mt-4 text-gray-400 text-sm">Drive Growth with Smart Marketing.</p>
+                    <div class="mt-4 space-y-2 text-sm">
+                        <p class="flex items-start text-gray-400">
+                            <svg class="w-5 h-5 mr-2 text-[var(--color-accent-blue)] flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            100 N Central Expy Suite914/1 Main, Richardson, TX 75080, United States
+                        </p>
+                        <a href="mailto:hello@silverantmarketing.com" class="flex items-center text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">
+                            <svg class="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            hello@silverantmarketing.com
+                        </a>
+                        <a href="tel:+12142476882" class="flex items-center text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">
+                            <svg class="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.5l1.5 4-4.5 4.5a12 12 0 007 7l4.5-4.5 4 1.5V19a2 2 0 01-2 2h-4a2 2 0 01-2-2v-4a2 2 0 012-2h4"></path></svg>
+                            +1 214-247-6882
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Services -->
+                <div class="md:col-span-1">
+                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Services</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">SEO</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">PPC</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">SMM</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Content Marketing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Web Design & Dev</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Col 3: Company -->
+                <div class="md:col-span-1">
+                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Company</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Portfolio</a></li>
+                        <li><a href="#clients" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Clients</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Blogs</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Col 4: Resources -->
+                <div class="md:col-span-1">
+                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Resources</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Case Studies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Col 5: Social Media -->
+                <div class="md:col-span-1">
+                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Follow Us</h5>
+                    <div class="flex space-x-4">
+                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h3V2h-3c-3.87 0-5 2.13-5 5.5V9.5H7v4h4V22h6v-8.5z"></path></svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 12.5V19h-3V12.5h3zM6.5 6.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM16 12.5V19h-3.5v-5.5a2 2 0 00-2-2c-.55 0-1 .45-1 1V19H8V12.5c0-3.5 3-4 3.5-4a4 4 0 014 4z"></path></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 14h-7a.5.5 0 01-.5-.5v-7a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v7a.5.5 0 01-.5.5zm-3.5-7.5a3 3 0 100 6 3 3 0 000-6zm4-1.5a1 1 0 100 2 1 1 0 000-2z"></path></svg>
+                        </a>
+                        <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-[var(--color-accent-blue)] transition duration-150">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.5-3.5L10 8V15zm12-4.45c-.24-1.15-.74-2.2-1.46-3.13-.72-.94-1.66-1.63-2.65-2.22C16.81 2.37 14.5 2 12 2c-2.5 0-4.81.37-6.89.75-1 .59-1.93 1.28-2.65 2.22-.72.93-1.22 1.98-1.46 3.13C2 10.55 2 12 2 12s0 1.45.14 2.55c.24 1.15.74 2.2 1.46 3.13.72.94 1.66 1.63 2.65 2.22C7.19 21.63 9.5 22 12 22s4.81-.37 6.89-.75c1-.59 1.93-1.28 2.65-2.22.72-.93 1.22-1.98 1.46-3.13C22 13.45 22 12 22 12s0-1.45-.14-2.55zM9 12V9.5L14 12l-5 2.5V12z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-gray-500 text-sm mt-8">
+                &copy; 2024 Silver Ant Marketing. All rights reserved. (Clone for demonstration purposes only)
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu and AI Functions -->
+    <script type="module">
+        // Helper to ensure crypto.randomUUID is available (especially for iframe/older envs)
+        if (typeof crypto.randomUUID === 'undefined') {
+            crypto.randomUUID = () => {
+                let d = new Date().getTime();
+                if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+                    d += performance.now(); //use high-precision timer if available
+                }
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    let r = (d + Math.random()*16)%16 | 0;
+                    d = Math.floor(d/16);
+                    return (c==='x' ? r : (r&0x3|0x8)).toString(16);
+                });
+            };
+        }
+
+        // --- FIREBASE AND ENVIRONMENT SETUP (MANDATORY) ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+
+        if (firebaseConfig) {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+
+            // Auth Setup
+            if (initialAuthToken) {
+                signInWithCustomToken(auth, initialAuthToken).catch(e => {
+                    console.error("Firebase Custom Token sign-in failed:", e);
+                    signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+                });
+            } else {
+                signInAnonymously(auth).catch(e => console.error("Anonymous sign-in failed:", e));
+            }
+        } else {
+            console.warn("Firebase config missing. LLM API Key fallback will be used.");
+        }
+        
+        // Use a generic placeholder API key if the environment variables aren't injected
+        // The Canvas environment is expected to proxy and fill this key correctly.
+        const apiKey = "";
+        
+        // --- GEMINI API CALLER FUNCTION ---
+        /**
+         * Generic function to call the Gemini API with exponential backoff.
+         * @param {string} userQuery - The main text query.
+         * @param {object} generationConfig - Configuration for the generation (e.g., structured output schema).
+         * @param {string} systemInstruction - The system persona/role.
+         * @returns {Promise<object>} The parsed response JSON or null on failure.
+         */
+        async function callGeminiAPI(userQuery, generationConfig = {}, systemInstruction = null) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const maxRetries = 3;
+            
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                generationConfig: generationConfig,
+            };
+
+            if (systemInstruction) {
+                payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+            }
+
+            for (let attempt = 0; attempt < maxRetries; attempt++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429 && attempt < maxRetries - 1) {
+                            // Too many requests, retry with exponential backoff
+                            const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            continue;
+                        }
+                        throw new Error(`API call failed with status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+                    
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        const rawText = candidate.content.parts[0].text;
+                        // For structured output, we must parse the JSON string
+                        if (generationConfig.responseMimeType === "application/json") {
+                            try {
+                                return JSON.parse(rawText);
+                            } catch (e) {
+                                console.error("Failed to parse JSON response:", rawText, e);
+                                throw new Error("Received non-JSON response when structured output was expected.");
+                            }
+                        }
+                        // For plain text, return the string directly
+                        return rawText;
+                    }
+                    
+                    throw new Error("API response was empty or malformed.");
+
+                } catch (error) {
+                    console.error(`Attempt ${attempt + 1} failed:`, error.message);
+                    if (attempt === maxRetries - 1) {
+                        return null; // Final failure
+                    }
+                }
+            }
+            return null; // Should be unreachable if maxRetries > 0
+        }
+
+        // --- FEATURE 1: PERSONALIZED STRATEGY SUGGESTOR ---
+        const strategyBtn = document.getElementById('strategy-suggestor-btn');
+        const businessInput = document.getElementById('ai-business-input');
+        const challengeInput = document.getElementById('ai-challenge-input');
+        const resultsContainer = document.getElementById('strategy-results-container');
+        const recommendationsDiv = document.getElementById('strategy-recommendations');
+        const suggestorLoading = document.getElementById('suggestor-loading');
+        const suggestorText = document.getElementById('suggestor-text');
+        const suggestorError = document.getElementById('suggestor-error');
+
+        strategyBtn.addEventListener('click', async () => {
+            const business = businessInput.value.trim();
+            const challenge = challengeInput.value.trim();
+
+            resultsContainer.classList.add('hidden');
+            recommendationsDiv.innerHTML = '';
+            suggestorError.classList.add('hidden');
+
+            if (!business || !challenge) {
+                suggestorError.textContent = "Please describe both your business and your current challenge.";
+                suggestorError.classList.remove('hidden');
+                return;
+            }
+
+            // Set loading state
+            strategyBtn.disabled = true;
+            suggestorText.textContent = 'Analyzing...';
+            suggestorLoading.classList.remove('hidden');
+
+            const serviceList = "SEO, PPC, SMM, Web Design & Development, Graphic Designing, Video Editing Services";
+            const userQuery = `My business is: "${business}". My current marketing challenge is: "${challenge}". Based on Silver Ant Marketing's core services, recommend the top 3 services that offer the highest immediate ROI for me.`;
+            
+            const systemInstruction = `Act as a senior digital marketing strategist for Silver Ant Marketing. You will analyze the provided business and challenge. Recommend only three services from this list: ${serviceList}. Provide a concise, professional justification (1-2 sentences) for each recommendation. Your response MUST be a JSON array of three objects, following the provided schema.`;
+
+            const generationConfig = {
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "ARRAY",
+                    items: {
+                        type: "OBJECT",
+                        properties: {
+                            "service": { "type": "STRING", "description": "The name of the service from the allowed list." },
+                            "justification": { "type": "STRING", "description": "A concise justification for the service recommendation." }
+                        },
+                        "propertyOrdering": ["service", "justification"]
+                    }
+                }
+            };
+
+            const result = await callGeminiAPI(userQuery, generationConfig, systemInstruction);
+
+            // Reset loading state
+            strategyBtn.disabled = false;
+            suggestorText.textContent = '✨ Analyze My Challenge';
+            suggestorLoading.classList.add('hidden');
+
+            if (result && Array.isArray(result) && result.length > 0) {
+                result.forEach(item => {
+                    const recElement = document.createElement('div');
+                    recElement.className = 'p-3 bg-gray-800 rounded-md border border-gray-700';
+                    recElement.innerHTML = `
+                        <h5 class="text-lg font-semibold text-[var(--color-accent-blue)]">${item.service}</h5>
+                        <p class="text-gray-400 text-sm mt-1">${item.justification}</p>
+                    `;
+                    recommendationsDiv.appendChild(recElement);
+                });
+                resultsContainer.classList.remove('hidden');
+                document.getElementById('capabilities').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                suggestorError.textContent = "Sorry, our strategist AI couldn't formulate a suggestion right now. Please try again later or refine your input.";
+                suggestorError.classList.remove('hidden');
+            }
+        });
+
+
+        // --- FEATURE 2: AI MESSAGE DRAFT ASSISTANT ---
+        const draftBtn = document.getElementById('draft-message-btn');
+        const goalInput = document.getElementById('goal-input');
+        const messageTextarea = document.getElementById('message');
+        const draftLoading = document.getElementById('draft-loading');
+        const draftText = document.getElementById('draft-text');
+        const draftError = document.getElementById('draft-error');
+
+        draftBtn.addEventListener('click', async () => {
+            const projectGoal = goalInput.value.trim();
+
+            draftError.classList.add('hidden');
+
+            if (!projectGoal) {
+                draftError.textContent = "Please enter your main project goal first.";
+                draftError.classList.remove('hidden');
+                return;
+            }
+
+            // Set loading state
+            draftBtn.disabled = true;
+            draftText.textContent = 'Drafting...';
+            draftLoading.classList.remove('hidden');
+
+            const userQuery = `Goal: "${projectGoal}".`;
+            const systemInstruction = `You are an expert copywriter for a digital marketing agency. Take the user's project goal and draft a compelling, professional, and concise introductory message (2-3 sentences max) for the agency's contact form. Do not use quotes or salutations.`;
+
+            const result = await callGeminiAPI(userQuery, {}, systemInstruction);
+
+            // Reset loading state
+            draftBtn.disabled = false;
+            draftText.textContent = '✨ Draft My Introduction Message';
+            draftLoading.classList.add('hidden');
+            
+            if (result) {
+                messageTextarea.value = result;
+            } else {
+                draftError.textContent = "Failed to draft the message. Please try again or type your message manually.";
+                draftError.classList.remove('hidden');
+            }
+        });
+
+        // --- GENERAL UI LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Hide menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
