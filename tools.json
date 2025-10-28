@@ -4,6 +4,14 @@
     "description": "A tool that suggests AI strategies for a given challenge in your business.",
     "link": "./tools/ai-strategy-suggestion/"
   },
+      {
+      "name": "AI Landing Page Optimizer",
+      "description": "Analyze landing pages and get AI-powered optimization suggestions with predicted conversion improvements",
+      "link": "tools/ai-landing-optimizer/",
+      "category": "AI/Marketing",
+      "icon": "✨"
+    },
+
   {
     "name": "Image Optimizer",
     "description": "A simple client-side image compression tool using Canvas API.",
