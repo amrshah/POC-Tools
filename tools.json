@@ -25,7 +25,6 @@
       "category": "AI/Marketing",
       "icon": "fa-solid fa-rocket"
     },
-
   {
     "name": "Image Optimizer",
     "description": "A simple client-side image compression tool using Canvas API.",
