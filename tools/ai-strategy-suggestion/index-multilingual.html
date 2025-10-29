@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAM Strategy AI Consultant (Structured)</title>
+    <title> Strategy AI Consultant (Structured)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet">
@@ -69,7 +69,7 @@
         </div>
 
         <h1 id="main-title" class="text-3xl font-bold text-center text-black-700">
-            <i class="fa-solid fa-algolia text-black-600"></i>SAM Strategy AI: Local Business Consultant
+            <i class="fa-solid fa-algolia text-black-600"></i> Strategy AI: Local Business Consultant
         </h1>
         <p id="description-text" class="text-center text-sm text-gray-500">
             Ask for a strategy. The AI will respond as an expert, delivering structured, actionable recommendations.
@@ -94,7 +94,7 @@
         <div class="relative pt-6">
             <h2 id="recommendations-title" class="text-xl font-semibold text-gray-700 mb-3 border-b pb-2">Top Recommendations</h2>
             <div id="loading-indicator" class="text-center hidden text-indigo-500 font-medium py-4">
-                SAM Strategy AI is analyzing the market...
+                 Strategy AI is analyzing the market...
             </div>
             <div id="response-output" 
                 class="min-h-[150px] bg-white text-gray-800">
@@ -117,14 +117,14 @@
         const LANGUAGES = {
             'en': {
                 langName: "English",
-                title: "SAM Strategy AI: Local Business Consultant",
+                title: " Strategy AI: Local Business Consultant",
                 description: "Ask for a strategy. The AI will respond as an expert, delivering structured, actionable recommendations.",
                 label1: "1. Your Business Type (e.g., Laptop Repairs):",
                 label2: "2. Your Immediate Goal (e.g., I need a website):",
                 button: "Get Expert Strategy",
                 recommendationsTitle: "Top Recommendations",
                 initialText: "Enter your business details and goal above to receive a tailored 3-point strategy.",
-                loading: "SAM Strategy AI is analyzing the market...",
+                loading: " Strategy AI is analyzing the market...",
                 placeholderBusiness: "Laptop Repairs",
                 placeholderGoal: "I need a website for my laptop repair business",
                 errorInput: "Please fill in both the business type and the goal.",
@@ -135,14 +135,14 @@
             },
             'ur': {
                 langName: "Urdu",
-                title: "SAM اسٹریٹیجی AI: مقامی کاروباری مشیر",
+                title: " اسٹریٹیجی AI: مقامی کاروباری مشیر",
                 description: "ایک حکمت عملی پوچھیں۔ AI ایک ماہر کے طور پر جواب دے گا، منظم، قابل عمل سفارشات فراہم کرے گا۔",
                 label1: "1. آپ کے کاروبار کی قسم (مثال کے طور پر، لیپ ٹاپ مرمت):",
                 label2: "2. آپ کا فوری ہدف (مثال کے طور پر، مجھے ایک ویب سائٹ چاہیے):",
                 button: "ماہرانہ حکمت عملی حاصل کریں",
                 recommendationsTitle: "اہم سفارشات",
                 initialText: "اپنی کاروبار کی تفصیلات اور ہدف درج کریں تاکہ ایک موزوں 3-نکاتی حکمت عملی حاصل کی جا سکے۔",
-                loading: "SAM اسٹریٹیجی AI مارکیٹ کا تجزیہ کر رہا ہے...",
+                loading: " اسٹریٹیجی AI مارکیٹ کا تجزیہ کر رہا ہے...",
                 placeholderBusiness: "لیپ ٹاپ مرمت",
                 placeholderGoal: "مجھے اپنے لیپ ٹاپ مرمت کے کاروبار کے لیے ایک ویب سائٹ چاہیے۔",
                 errorInput: "براہ کرم کاروبار کی قسم اور ہدف دونوں پُر کریں۔",
@@ -153,14 +153,14 @@
             },
             'ar': {
                 langName: "Arabic",
-                title: "مستشار استراتيجية SAM AI: مستشار الأعمال المحلية",
+                title: "مستشار استراتيجية  AI: مستشار الأعمال المحلية",
                 description: "اطلب استراتيجية. سيستجيب الذكاء الاصطناعي كخبير، مقدماً توصيات منظمة وقابلة للتطبيق.",
                 label1: "1. نوع عملك (على سبيل المثال، إصلاح أجهزة الكمبيوتر المحمول):",
                 label2: "2. هدفك الفوري (على سبيل المثال، أحتاج إلى موقع ويب):",
                 button: "احصل على استراتيجية الخبراء",
                 recommendationsTitle: "أهم التوصيات",
                 initialText: "أدخل تفاصيل عملك وهدفك أعلاه للحصول على استراتيجية مخصصة من 3 نقاط.",
-                loading: "مستشار استراتيجية SAM AI يحلل السوق...",
+                loading: "مستشار استراتيجية  AI يحلل السوق...",
                 placeholderBusiness: "إصلاح أجهزة الكمبيوتر المحمول",
                 placeholderGoal: "أحتاج إلى موقع ويب لعملي في إصلاح أجهزة الكمبيوتر المحمول",
                 errorInput: "الرجاء ملء كل من نوع العمل والهدف.",
@@ -271,7 +271,7 @@
 
             // --- 1. Define Persona (System Instruction) ---
             const targetLanguage = LANGUAGES[currentLang].langName;
-            const systemPrompt = `You are 'SAM Strategy AI,' an elite consultant specializing in small to medium-sized local service businesses. Analyze the user's business and goal and provide a structured, prioritized list of the top 3 tactical recommendations. Your tone must be concise, expert, and actionable, focusing on maximizing local search visibility and converting high-intent local traffic. Crucially, respond entirely in ${targetLanguage}. Never use the word 'template' or 'general.'`;
+            const systemPrompt = `You are ' Strategy AI,' an elite consultant specializing in small to medium-sized local service businesses. Analyze the user's business and goal and provide a structured, prioritized list of the top 3 tactical recommendations. Your tone must be concise, expert, and actionable, focusing on maximizing local search visibility and converting high-intent local traffic. Crucially, respond entirely in ${targetLanguage}. Never use the word 'template' or 'general.'`;
             
             // --- 2. Define Structured Output (JSON Schema) ---
             const responseSchema = {
