@@ -15,7 +15,7 @@
   {
       "name": "AEO Tool",
       "description": "A tool for Answer Engine Optimization (AEO) to enhance content visibility in AI-driven answer engines.",
-      "link": "./tools/aeo-tool/",
+      "link": "./tools/aeo-dashboard/",
       "icon": "fa-solid fa-search"
   },
       {
