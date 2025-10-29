@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEO Dashboard - AI Optimization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">A</div>
+                        <span class="text-xl font-bold dark:text-white">AEO Suite</span>
+                    </div>
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto p-4 space-y-1">
+                <a href="#" onclick="showSection('dashboard')" class="nav-link active flex items-center gap-3 px-4 py-3 rounded-lg">
+                    <i class="fas fa-chart-line w-4"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" onclick="showSection('content')" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg">
+                    <i class="fas fa-pen-fancy w-4"></i>
+                    <span>AI Content Writer</span>
+                </a>
+                
+                <!-- AI Visibility with submenu -->
+                <div>
+                    <button onclick="toggleSubmenu('visibility')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-eye w-4"></i>
+                            <span>AI Visibility</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="visibility-icon"></i>
+                    </button>
+                    <div id="visibility-menu" class="ml-4 mt-1 space-y-1 hidden">
+                        <a href="#" onclick="showSection('overview')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-chart-pie w-4"></i>
+                            <span>Overview</span>
+                        </a>
+                        <a href="#" onclick="showSection('visibility')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-eye w-4"></i>
+                            <span>Visibility</span>
+                        </a>
+                        <a href="#" onclick="showSection('performance')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-tachometer-alt w-4"></i>
+                            <span>Performance</span>
+                        </a>
+                        <a href="#" onclick="showSection('sentiment')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-comments w-4"></i>
+                            <span>Sentiment</span>
+                        </a>
+                        <a href="#" onclick="showSection('comparison')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-balance-scale w-4"></i>
+                            <span>Comparison</span>
+                        </a>
+                        <a href="#" onclick="showSection('global')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-globe w-4"></i>
+                            <span>Global</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AI Optimization with submenu -->
+                <div>
+                    <button onclick="toggleSubmenu('optimization')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-cogs w-4"></i>
+                            <span>AI Optimization</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="optimization-icon"></i>
+                    </button>
+                    <div id="optimization-menu" class="ml-4 mt-1 space-y-1 hidden">
+                        <a href="#" onclick="showSection('topics')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-hashtag w-4"></i>
+                            <span>Topics</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="#" onclick="showSection('audio')" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg">
+                    <i class="fas fa-microphone w-4"></i>
+                    <span>Audio Modality</span>
+                </a>
+                
+                <!-- Agent Analytics with submenu -->
+                <div>
+                    <button onclick="toggleSubmenu('analytics')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-chart-bar w-4"></i>
+                            <span>Agent Analytics</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="analytics-icon"></i>
+                    </button>
+                    <div id="analytics-menu" class="ml-4 mt-1 space-y-1 hidden">
+                        <a href="#" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-robot w-4"></i>
+                            <span>AI Agents</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="text-xs text-gray-500 dark:text-gray-400">© 2025 AEO Suite</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-8 py-4 sticky top-0 z-10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold dark:text-white" id="pageTitle">Dashboard</h1>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Displaying Data from 12:00AM EST today</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <select class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                            <option>Apr - May</option>
+                            <option>May - Jun</option>
+                        </select>
+                        <select class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                            <option>Monthly</option>
+                            <option>Weekly</option>
+                            <option>Daily</option>
+                        </select>
+                        <select id="clientSelector" onchange="switchClient()" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                            <option value="0">PixelOne AV</option>
+                            <option value="1">TomkenVet</option>
+                            <option value="2">GBVets</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-8">
+                <!-- Dashboard Section -->
+                <div id="section-dashboard" class="section-content">
+                    <!-- Top Stats -->
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Brand Visibility</h3>
+                                <i class="fas fa-info-circle text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <div class="text-3xl font-bold dark:text-white" id="visibility">86.2</div>
+                                    <div class="text-sm text-green-500 mt-1">
+                                        <i class="fas fa-arrow-up"></i> <span id="visibilityChange">1.8%</span>
+                                    </div>
+                                </div>
+                                <div style="width: 120px; height: 60px;">
+                                    <canvas id="visibilityChart"></canvas>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-4">Displaying data from all time</p>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Current Sentiment Analysis</h3>
+                                <i class="fas fa-info-circle text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <div class="text-3xl font-bold dark:text-white" id="sentiment">64.7</div>
+                                    <div class="text-sm text-red-500 mt-1">
+                                        <i class="fas fa-arrow-down"></i> <span id="sentimentChange">1.7%</span>
+                                    </div>
+                                </div>
+                                <div style="width: 120px; height: 60px;">
+                                    <canvas id="sentimentChart"></canvas>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-4">Displaying data from all time</p>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Brand Visibility Score</h3>
+                                <i class="fas fa-info-circle text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm">1</span>
+                                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                                        <span class="text-sm dark:text-gray-300">Gemini</span>
+                                    </div>
+                                    <span class="text-sm font-medium dark:text-white" id="llm1">96.1</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm">2</span>
+                                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                        <span class="text-sm dark:text-gray-300">Perplexity</span>
+                                    </div>
+                                    <span class="text-sm font-medium dark:text-white" id="llm2">94.2</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm">3</span>
+                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                        <span class="text-sm dark:text-gray-300">ChatGPT</span>
+                                    </div>
+                                    <span class="text-sm font-medium dark:text-white" id="llm3">93.9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Optimization Section -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold dark:text-white mb-6">AI Optimization</h2>
+                        <div class="grid grid-cols-2 gap-6">
+                            <!-- Topic Ranking -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="font-semibold dark:text-white"><i class="fas fa-trophy text-yellow-500 mr-2"></i>Topic Ranking</h3>
+                                    <select class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm dark:bg-gray-700 dark:text-white">
+                                        <option>ChatGPT</option>
+                                        <option>Gemini</option>
+                                        <option>Perplexity</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-3" id="topicList"></div>
+                            </div>
+
+                            <!-- AVI Assessment -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="font-semibold dark:text-white"><i class="fas fa-bolt text-yellow-400 mr-2"></i>AI Visibility Impact Assessment</h3>
+                                    <select class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm dark:bg-gray-700 dark:text-white">
+                                        <option>Gemini</option>
+                                        <option>ChatGPT</option>
+                                        <option>Perplexity</option>
+                                    </select>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4 mb-4">
+                                    <div class="bg-red-900/30 border border-red-800 rounded-lg p-4">
+                                        <div class="text-xs text-red-300 mb-1">Low AVI</div>
+                                        <div class="text-2xl font-bold text-red-400" id="lowAVI">135</div>
+                                        <div class="text-xs text-red-300 mt-1">+5</div>
+                                    </div>
+                                    <div class="bg-yellow-900/30 border border-yellow-800 rounded-lg p-4">
+                                        <div class="text-xs text-yellow-300 mb-1">Medium AVI</div>
+                                        <div class="text-2xl font-bold text-yellow-400" id="mediumAVI">101</div>
+                                        <div class="text-xs text-yellow-300 mt-1">+11</div>
+                                    </div>
+                                    <div class="bg-green-900/30 border border-green-800 rounded-lg p-4">
+                                        <div class="text-xs text-green-300 mb-1">High AVI</div>
+                                        <div class="text-2xl font-bold text-green-400" id="highAVI">237</div>
+                                        <div class="text-xs text-green-300 mt-1">+40</div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Your brand's overall AI Visibility Impact is <span class="text-green-400 font-semibold">High</span>.</p>
+                                <button class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-medium">
+                                    Optimization Hub
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Trends -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <h3 class="font-semibold dark:text-white mb-4">Visibility Trend</h3>
+                            <div style="height: 250px;">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <h3 class="font-semibold dark:text-white mb-4">LLM Performance Comparison</h3>
+                            <div style="height: 250px;">
+                                <canvas id="llmChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Sections -->
+                <div id="section-content" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-pen-fancy mr-2"></i>AI Content Writer</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Content generation tools and AI writing assistant will appear here.</p>
+                    </div>
+                </div>
+
+                <div id="section-overview" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-chart-pie mr-2"></i>Overview</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Comprehensive visibility overview and metrics.</p>
+                    </div>
+                </div>
+
+                <div id="section-visibility" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-eye mr-2"></i>Visibility Analysis</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Detailed visibility metrics and trends.</p>
+                    </div>
+                </div>
+
+                <div id="section-performance" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-tachometer-alt mr-2"></i>Performance Metrics</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Performance analysis and optimization opportunities.</p>
+                    </div>
+                </div>
+
+                <div id="section-sentiment" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-comments mr-2"></i>Sentiment Analysis</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Brand sentiment tracking and analysis.</p>
+                    </div>
+                </div>
+
+                <div id="section-comparison" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-balance-scale mr-2"></i>Comparison</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Compare performance across different LLMs and time periods.</p>
+                    </div>
+                </div>
+
+                <div id="section-global" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-globe mr-2"></i>Global Insights</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Global market visibility and regional performance.</p>
+                    </div>
+                </div>
+
+                <div id="section-topics" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-hashtag mr-2"></i>Topics</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Topic performance and optimization strategies.</p>
+                    </div>
+                </div>
+
+                <div id="section-audio" class="section-content hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-microphone mr-2"></i>Audio Modality</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Voice search and audio content optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const clients = [
+            {
+                name: 'PixelOne AV',
+                visibility: 86.2,
+                visibilityChange: 1.8,
+                sentiment: 64.7,
+                sentimentChange: -1.7,
+                llm1: 96.1,
+                llm2: 94.2,
+                llm3: 93.9,
+                lowAVI: 135,
+                mediumAVI: 101,
+                highAVI: 237,
+                topics: ['Best AV systems', 'Top audio solutions', 'Home theater setup', 'Commercial AV', 'Smart conference rooms', 'AV installation']
+            },
+            {
+                name: 'TomkenVet',
+                visibility: 78.5,
+                visibilityChange: 2.3,
+                sentiment: 71.2,
+                sentimentChange: 0.8,
+                llm1: 89.4,
+                llm2: 87.8,
+                llm3: 91.2,
+                lowAVI: 98,
+                mediumAVI: 156,
+                highAVI: 289,
+                topics: ['Best veterinary clinic', 'Emergency vet services', 'Pet surgery specialists', 'Animal hospital near me', 'Exotic pet care', 'Vet checkup services']
+            },
+            {
+                name: 'GBVets',
+                visibility: 92.1,
+                visibilityChange: -0.5,
+                sentiment: 68.9,
+                sentimentChange: 1.2,
+                llm1: 94.7,
+                llm2: 96.3,
+                llm3: 89.1,
+                lowAVI: 112,
+                mediumAVI: 134,
+                highAVI: 267,
+                topics: ['Top veterinary services', 'Pet wellness programs', 'Veterinary diagnostics', 'Dog vaccination', 'Cat dental care', 'Pet grooming services']
+            }
+        ];
+
+        let currentClient = 0;
+        let isDark = false;
+        let charts = {};
+
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.classList.toggle('dark');
+            document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            updateCharts();
+        }
+
+        function switchClient() {
+            currentClient = parseInt(document.getElementById('clientSelector').value);
+            updateDashboard();
+        }
+
+        function toggleSubmenu(menu) {
+            const menuEl = document.getElementById(menu + '-menu');
+            const iconEl = document.getElementById(menu + '-icon');
+            menuEl.classList.toggle('hidden');
+            iconEl.classList.toggle('rotate-180');
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('section-' + section).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            event.target.closest('.nav-link').classList.add('active');
+
+            const titles = {
+                dashboard: 'Dashboard',
+                content: 'AI Content Writer',
+                overview: 'Overview',
+                visibility: 'Visibility Analysis',
+                performance: 'Performance Metrics',
+                sentiment: 'Sentiment Analysis',
+                comparison: 'Comparison',
+                global: 'Global Insights',
+                topics: 'Topics',
+                audio: 'Audio Modality'
+            };
+            document.getElementById('pageTitle').textContent = titles[section] || 'Dashboard';
+        }
+
+        function updateDashboard() {
+            const client = clients[currentClient];
+            document.getElementById('visibility').textContent = client.visibility;
+            document.getElementById('visibilityChange').textContent = Math.abs(client.visibilityChange) + '%';
+            document.getElementById('sentiment').textContent = client.sentiment;
+            document.getElementById('sentimentChange').textContent = Math.abs(client.sentimentChange) + '%';
+            document.getElementById('llm1').textContent = client.llm1;
+            document.getElementById('llm2').textContent = client.llm2;
+            document.getElementById('llm3').textContent = client.llm3;
+            document.getElementById('lowAVI').textContent = client.lowAVI;
+            document.getElementById('mediumAVI').textContent = client.mediumAVI;
+            document.getElementById('highAVI').textContent = client.highAVI;
+
+            const topicList = document.getElementById('topicList');
+            topicList.innerHTML = client.topics.map((topic, i) => `
+                <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0">
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm text-gray-500 w-4">${i + 1}</span>
+                        <span class="text-sm dark:text-gray-300">${topic}</span>
+                    </div>
+                    <i class="fas fa-external-link-alt text-xs text-gray-400"></i>
+                </div>
+            `).join('');
+
+            updateCharts();
+        }
+
+        function updateCharts() {
+            const textColor = isDark ? '#9CA3AF' : '#6B7280';
+            const gridColor = isDark ? '#374151' : '#E5E7EB';
+            
+            Object.values(charts).forEach(chart => chart && chart.destroy());
+
+            const client = clients[currentClient];
+
+            charts.visibility = new Chart(document.getElementById('visibilityChart'), {
+                type: 'line',
+                data: {
+                    labels: ['', '', '', '', '', ''],
+                    datasets: [{
+                        data: [80, 82, 84, 85, 83, client.visibility],
+                        borderColor: '#10B981',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { display: false } }
+                }
+            });
+
+            // charts.sentiment = new Chart(document.getElementById('sentimentChart'), {
+            //     type: 'line',
+            //     data: {
+            //         labels: ['', '', '', '', '', ''],
+            //         datasets: [{
+            //             data: [68, 70, 72, 69, 67, client.sentiment],
+            //             borderColor: '#EF4444',
+            //             borderWidth: 2,
+            //             fill: false,
+            //             tension:
+        }
+    </script>
+</body>
+</html>

@@ -11,6 +11,13 @@
       "link": "./tools/ai-strategy-suggestion/index-multilingual.html",
       "icon": "fa-solid fa-lightbulb"
   },
+  
+  {
+      "name": "AEO Tool",
+      "description": "A tool for Answer Engine Optimization (AEO) to enhance content visibility in AI-driven answer engines.",
+      "link": "./tools/aeo-tool/",
+      "icon": "fa-solid fa-search"
+  },
       {
       "name": "AI Landing Page Optimizer",
       "description": "Analyze landing pages and get AI-powered optimization suggestions with predicted conversion improvements",
