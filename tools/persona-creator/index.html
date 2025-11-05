@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Persona Creator</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persona Creator - POC Tools</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <a href="../../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Tools</a>
+  <a href="../../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Tools</a>
 
   <header>
-    <h1><i class="fa-solid fa-user"></i> AI Persona Creator</h1>
+    <h1><i class="fa-solid fa-user"></i> Persona Creator</h1>
     <p class="subtitle">Generate quick, realistic personas from basic attributes.</p>
   </header>
-  <div class="container">
-    
 
-    <div class="form-section">
-      <label>Role / Job Title:</label>
-        <input list="roles" id="role" placeholder="e.g. Marketing Manager">
-        <datalist id="roles">
+  <!-- Persona Input Form -->
+  <section class="settings show">
+    <div class="setting-row">
+      <label for="role">Role / Job Title</label>
+      <input list="roles" id="role" placeholder="e.g. Marketing Manager">
+      <datalist id="roles">
         <option value="Marketing Manager">
         <option value="Product Manager">
         <option value="Software Engineer">
@@ -31,12 +31,13 @@
         <option value="UX Designer">
         <option value="Operations Lead">
         <option value="HR Manager">
-        </datalist>
+      </datalist>
+    </div>
 
-
-      <label>Goal / Objective:</label>
-        <input list="goals" id="goal" placeholder="e.g. Increase brand awareness">
-        <datalist id="goals">
+    <div class="setting-row">
+      <label for="goal">Goal / Objective</label>
+      <input list="goals" id="goal" placeholder="e.g. Increase brand awareness">
+      <datalist id="goals">
         <option value="Increase brand awareness">
         <option value="Improve customer retention">
         <option value="Launch a successful product">
@@ -44,47 +45,60 @@
         <option value="Enhance user engagement">
         <option value="Boost sales revenue">
         <option value="Streamline internal processes">
-        </datalist>
+      </datalist>
+    </div>
 
+    <div class="setting-row">
+      <label for="challenge">Challenge / Pain Point</label>
+      <input list="challenges" id="challenge" placeholder="e.g. Limited ad budget">
+      <datalist id="challenges">
+        <option value="Limited ad budget">
+        <option value="Tight deadlines">
+        <option value="Lack of skilled talent">
+        <option value="Low customer engagement">
+        <option value="Technical limitations">
+        <option value="Poor data visibility">
+        <option value="Communication gaps between teams">
+      </datalist>
+    </div>
 
-      <label>Challenge / Pain Point:</label>
-<input list="challenges" id="challenge" placeholder="e.g. Limited ad budget">
-<datalist id="challenges">
-  <option value="Limited ad budget">
-  <option value="Tight deadlines">
-  <option value="Lack of skilled talent">
-  <option value="Low customer engagement">
-  <option value="Technical limitations">
-  <option value="Poor data visibility">
-  <option value="Communication gaps between teams">
-</datalist>
-
-
-      <label>Tone / Personality:</label>
+    <div class="setting-row">
+      <label for="tone">Tone / Personality</label>
       <select id="tone">
         <option value="professional">Professional</option>
         <option value="creative">Creative</option>
         <option value="friendly">Friendly</option>
         <option value="analytical">Analytical</option>
       </select>
-
-      <button onclick="generatePersona()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Persona</button>
     </div>
 
-    <div id="personaCard" class="persona-card hidden">
-      <img id="avatar" alt="Avatar" />
+    <div class="action-buttons">
+      <button class="btn-primary" onclick="generatePersona()">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Persona
+      </button>
+    </div>
+  </section>
+
+  <!-- Persona Output -->
+  <section class="preview-container" id="personaCard">
+    <div class="image-box">
+      <img id="avatar" alt="Avatar">
       <h2 id="personaName"></h2>
       <p><strong>Role:</strong> <span id="personaRole"></span></p>
       <p><strong>Personality:</strong> <span id="personaPersonality"></span></p>
       <p><strong>Goal:</strong> <span id="personaGoal"></span></p>
       <p><strong>Challenge:</strong> <span id="personaChallenge"></span></p>
       <p id="personaSummary" class="summary"></p>
-
-      <div class="actions">
-        <button onclick="generatePersona()">🎲 Generate Another</button>
-        <button onclick="copyPersona()">📋 Copy Persona</button>
-      </div>
     </div>
-  </div>
+
+    <div class="action-buttons">
+      <button class="btn-primary" onclick="generatePersona()">🎲 Generate Another</button>
+      <button class="btn-secondary" onclick="copyPersona()">📋 Copy Persona</button>
+    </div>
+  </section>
+
+  <footer style="margin-top: 40px; text-align: center; color: #777; font-size: 14px;">
+    <p>POC Tools by <strong>amrshah</strong> · <i class="fa-solid fa-flask"></i> Proof of Concept Collection</p>
+  </footer>
 </body>
 </html>
