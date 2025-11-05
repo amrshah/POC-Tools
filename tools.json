@@ -32,6 +32,12 @@
     "icon": "fa-solid fa-image"
   },
   {
+    "name": "Image Background Remover",
+    "description": "A simple client-side tool to remove image background.",
+    "link": "./tools/image-background-remover/",
+    "icon": "fa-solid fa-image"
+  },
+  {
     "name": "QR Generator",
     "description": "Generate and customize QR codes instantly.",
     "link": "./tools/qr-generator/",
