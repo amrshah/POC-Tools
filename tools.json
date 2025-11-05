@@ -1,19 +1,19 @@
 [
 {
-    "name": "AI Strategy Suggestion Tool",
+    "name": "AI Strategy Suggestion",
     "description": "A tool that suggests AI strategies for a given challenge in your business.",
     "link": "./tools/ai-strategy-suggestion/",
     "icon": "fa-solid fa-lightbulb"
   },
   {
-      "name": "AI Strategy Suggestion Tool (Multilingual)",
+      "name": "AI Strategy Suggestion (Multilingual)",
       "description": "A tool that suggests AI strategies for a given challenge in your business, supporting multiple languages including Urdu.",
       "link": "./tools/ai-strategy-suggestion/index-multilingual.html",
       "icon": "fa-solid fa-lightbulb"
   },
   
   {
-      "name": "AEO Tool",
+      "name": "AEO Dashboard",
       "description": "A tool for Answer Engine Optimization (AEO) to enhance content visibility in AI-driven answer engines.",
       "link": "./tools/aeo-dashboard/",
       "icon": "fa-solid fa-search"
