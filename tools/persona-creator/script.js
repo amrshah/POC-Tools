@@ -29,6 +29,7 @@ function generatePersona() {
   document.getElementById("personaSummary").textContent = summary;
 
   document.getElementById("personaCard").classList.remove("hidden");
+  document.getElementById("personaCard").classList.add("show");
 }
 
 function copyPersona() {
