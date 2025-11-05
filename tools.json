@@ -13,7 +13,7 @@
   },
   
   {
-      "name": "AEO Dashboard",
+      "name": "AEO Dashboard (Mockup only, not for production use)",
       "description": "A tool for Answer Engine Optimization (AEO) to enhance content visibility in AI-driven answer engines.",
       "link": "./tools/aeo-dashboard/",
       "icon": "fa-solid fa-search"
