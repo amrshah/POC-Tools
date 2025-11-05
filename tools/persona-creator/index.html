@@ -15,13 +15,45 @@
 
     <div class="form-section">
       <label>Role / Job Title:</label>
-      <input type="text" id="role" placeholder="e.g. Marketing Manager">
+        <input list="roles" id="role" placeholder="e.g. Marketing Manager">
+        <datalist id="roles">
+        <option value="Marketing Manager">
+        <option value="Product Manager">
+        <option value="Software Engineer">
+        <option value="Data Analyst">
+        <option value="Customer Support Specialist">
+        <option value="Sales Executive">
+        <option value="UX Designer">
+        <option value="Operations Lead">
+        <option value="HR Manager">
+        </datalist>
+
 
       <label>Goal / Objective:</label>
-      <input type="text" id="goal" placeholder="e.g. Increase brand awareness">
+        <input list="goals" id="goal" placeholder="e.g. Increase brand awareness">
+        <datalist id="goals">
+        <option value="Increase brand awareness">
+        <option value="Improve customer retention">
+        <option value="Launch a successful product">
+        <option value="Optimize team productivity">
+        <option value="Enhance user engagement">
+        <option value="Boost sales revenue">
+        <option value="Streamline internal processes">
+        </datalist>
+
 
       <label>Challenge / Pain Point:</label>
-      <input type="text" id="challenge" placeholder="e.g. Limited ad budget">
+<input list="challenges" id="challenge" placeholder="e.g. Limited ad budget">
+<datalist id="challenges">
+  <option value="Limited ad budget">
+  <option value="Tight deadlines">
+  <option value="Lack of skilled talent">
+  <option value="Low customer engagement">
+  <option value="Technical limitations">
+  <option value="Poor data visibility">
+  <option value="Communication gaps between teams">
+</datalist>
+
 
       <label>Tone / Personality:</label>
       <select id="tone">
