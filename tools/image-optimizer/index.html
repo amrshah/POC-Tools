@@ -19,6 +19,31 @@
     h1 { font-size: 28px; color: #333; margin-bottom: 8px; }
     .subtitle { color: #666; font-size: 14px; }
 
+    .format-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .format-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .format-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .format-btn.active {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+
     .upload-zone {
       background: white;
       border: 2px dashed #ccc;
