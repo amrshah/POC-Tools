@@ -1,0 +1,90 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.form-section label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 0.3rem;
+}
+
+button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1rem;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #357ab8;
+}
+
+.persona-card {
+  margin-top: 2rem;
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.persona-card img {
+  width: 80px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.summary {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.actions button {
+  margin: 0.5rem;
+  background: #2ecc71;
+}
+
+.actions button:hover {
+  background: #27ae60;
+}
+
+.hidden {
+  display: none;
+}

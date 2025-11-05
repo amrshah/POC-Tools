@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Persona Creator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fa-solid fa-user"></i> AI Persona Creator</h1>
+    <p class="subtitle">Generate quick, realistic personas from basic attributes.</p>
+
+    <div class="form-section">
+      <label>Role / Job Title:</label>
+      <input type="text" id="role" placeholder="e.g. Marketing Manager">
+
+      <label>Goal / Objective:</label>
+      <input type="text" id="goal" placeholder="e.g. Increase brand awareness">
+
+      <label>Challenge / Pain Point:</label>
+      <input type="text" id="challenge" placeholder="e.g. Limited ad budget">
+
+      <label>Tone / Personality:</label>
+      <select id="tone">
+        <option value="professional">Professional</option>
+        <option value="creative">Creative</option>
+        <option value="friendly">Friendly</option>
+        <option value="analytical">Analytical</option>
+      </select>
+
+      <button onclick="generatePersona()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Persona</button>
+    </div>
+
+    <div id="personaCard" class="persona-card hidden">
+      <img id="avatar" alt="Avatar" />
+      <h2 id="personaName"></h2>
+      <p><strong>Role:</strong> <span id="personaRole"></span></p>
+      <p><strong>Personality:</strong> <span id="personaPersonality"></span></p>
+      <p><strong>Goal:</strong> <span id="personaGoal"></span></p>
+      <p><strong>Challenge:</strong> <span id="personaChallenge"></span></p>
+      <p id="personaSummary" class="summary"></p>
+
+      <div class="actions">
+        <button onclick="generatePersona()">🎲 Generate Another</button>
+        <button onclick="copyPersona()">📋 Copy Persona</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -48,5 +48,12 @@
     "description": "Real-time Markdown to HTML converter.",
     "link": "./tools/markdown-previewer/",
     "icon": "fa-solid fa-file-markdown"
+  },
+  {
+    "name": "Persona Creator",
+    "description": "Generate quick AI personas from basic attributes.",
+    "link": "./tools/persona-creator/",
+    "icon": "fa-solid fa-user"
   }
+
 ]
