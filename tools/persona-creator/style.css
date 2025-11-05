@@ -6,6 +6,10 @@ body {
   color: #222;
 }
 
+header { margin-bottom: 30px; }
+    h1 { font-size: 28px; color: #333; margin-bottom: 8px; }
+    .subtitle { color: #666; font-size: 14px; }
+
 .container {
   max-width: 600px;
   margin: 40px auto;
