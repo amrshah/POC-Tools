@@ -110,7 +110,7 @@
     }
 
     .image-box img {
-      width: 100%;
+      max-width: 150px;
       height: auto;
       border: 1px solid #ddd;
     }
