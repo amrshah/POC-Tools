@@ -49,6 +49,7 @@
 
 
 
+
   </main>
 
   <footer class="mt-10 py-6 text-center text-sm text-gray-500">
@@ -67,7 +68,7 @@ const downloadZipBtn = document.getElementById('downloadZipBtn');
 
 let convertedImages = [];
 
-// Load an image (SVG-safe)
+// Load image safely, converting SVG into base64 DataURL
 async function loadImage(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -77,8 +78,9 @@ async function loadImage(file) {
     if (file.type === 'image/svg+xml') {
       const reader = new FileReader();
       reader.onload = () => {
-        const blob = new Blob([reader.result], { type: 'image/svg+xml' });
-        img.src = URL.createObjectURL(blob);
+        // Create base64 dataURL for SVG
+        const svgBase64 = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(reader.result)));
+        img.src = svgBase64;
       };
       reader.readAsText(file);
     } else {
@@ -109,14 +111,19 @@ convertBtn.addEventListener('click', async () => {
 
       convertedImages.push({ name: file.name, dataURL, format: targetFormat });
 
-      // Create preview comparison block
+      // Create reliable preview
+      const originalURL =
+        file.type === 'image/svg+xml'
+          ? 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(await file.text())))
+          : URL.createObjectURL(file);
+
       const preview = document.createElement('div');
       preview.className = "grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border rounded-lg bg-gray-50";
 
       preview.innerHTML = `
         <div class="text-center">
           <h3 class="font-semibold mb-2 text-sm text-gray-600">Original (${file.name.split('.').pop().toUpperCase()})</h3>
-          <img src="${URL.createObjectURL(file)}" class="mx-auto rounded shadow max-h-64 object-contain">
+          <img src="${originalURL}" class="mx-auto rounded shadow max-h-64 object-contain">
         </div>
         <div class="text-center">
           <h3 class="font-semibold mb-2 text-sm text-gray-600">Converted (${targetFormat.toUpperCase()})</h3>
@@ -149,6 +156,7 @@ downloadZipBtn.addEventListener('click', async () => {
   saveAs(blob, 'converted_images.zip');
 });
 </script>
+
 
 </body>
 </html>
