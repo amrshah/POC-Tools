@@ -30,6 +30,12 @@
     "description": "A simple client-side image compression tool using Canvas API.",
     "link": "./tools/image-optimizer/",
     "icon": "fa-solid fa-image"
+  },  
+  {
+    "name": "Image Converter",
+    "description": "Convert images between different formats.",
+    "link": "./tools/image-converter/",
+    "icon": "fa-solid fa-exchange-alt"
   },
   {
     "name": "Image Background Remover",
@@ -55,5 +61,6 @@
     "link": "./tools/persona-creator/",
     "icon": "fa-solid fa-user"
   }
+
 
 ]
