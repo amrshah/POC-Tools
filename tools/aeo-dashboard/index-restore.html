@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,89 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .nav-link {
-            color: #6B7280;
-            transition: all 0.2s;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: #3B82F6;
-        }
-
-        .nav-link.active {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: #3B82F6;
-            font-weight: 500;
-        }
-
-        .dark .nav-link {
-            color: #9CA3AF;
-        }
-
-        .dark .nav-link:hover {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: #60A5FA;
-        }
-
-        .dark .nav-link.active {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: #60A5FA;
-        }
-
-        .coming-soon-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-size: 10px;
-            font-weight: 600;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-left: 8px;
-        }
-
-        .coming-soon-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coming-soon-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                left: -100%;
-            }
-
-            100% {
-                left: 100%;
-            }
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-    </style>
 </head>
-
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
@@ -98,35 +15,28 @@
             <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <div
-                            class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-                            A</div>
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">A</div>
                         <span class="text-xl font-bold dark:text-white">AEO Suite</span>
                     </div>
-                    <button onclick="toggleTheme()"
-                        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400">
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400">
                         <i class="fas fa-moon" id="themeIcon"></i>
                     </button>
                 </div>
             </div>
-
+            
             <nav class="flex-1 overflow-y-auto p-4 space-y-1">
-                <a href="#" onclick="showSection('dashboard')"
-                    class="nav-link active flex items-center gap-3 px-4 py-3 rounded-lg">
+                <a href="#" onclick="showSection('dashboard')" class="nav-link active flex items-center gap-3 px-4 py-3 rounded-lg">
                     <i class="fas fa-chart-line w-4"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" onclick="showSection('content')"
-                    class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg">
+                <a href="#" onclick="showSection('content')" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg">
                     <i class="fas fa-pen-fancy w-4"></i>
                     <span>AI Content Writer</span>
-                    <span class="coming-soon-badge">Soon</span>
                 </a>
-
+                
                 <!-- AI Visibility with submenu -->
                 <div>
-                    <button onclick="toggleSubmenu('visibility')"
-                        class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
+                    <button onclick="toggleSubmenu('visibility')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
                         <div class="flex items-center gap-3">
                             <i class="fas fa-eye w-4"></i>
                             <span>AI Visibility</span>
@@ -134,33 +44,27 @@
                         <i class="fas fa-chevron-down text-xs transition-transform" id="visibility-icon"></i>
                     </button>
                     <div id="visibility-menu" class="ml-4 mt-1 space-y-1 hidden">
-                        <a href="#" onclick="showSection('overview')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('overview')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-chart-pie w-4"></i>
                             <span>Overview</span>
                         </a>
-                        <a href="#" onclick="showSection('visibility')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('visibility')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-eye w-4"></i>
                             <span>Visibility</span>
                         </a>
-                        <a href="#" onclick="showSection('performance')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('performance')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-tachometer-alt w-4"></i>
                             <span>Performance</span>
                         </a>
-                        <a href="#" onclick="showSection('sentiment')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('sentiment')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-comments w-4"></i>
                             <span>Sentiment</span>
                         </a>
-                        <a href="#" onclick="showSection('comparison')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('comparison')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-balance-scale w-4"></i>
                             <span>Comparison</span>
                         </a>
-                        <a href="#" onclick="showSection('global')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('global')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-globe w-4"></i>
                             <span>Global</span>
                         </a>
@@ -169,8 +73,7 @@
 
                 <!-- AI Optimization with submenu -->
                 <div>
-                    <button onclick="toggleSubmenu('optimization')"
-                        class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
+                    <button onclick="toggleSubmenu('optimization')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
                         <div class="flex items-center gap-3">
                             <i class="fas fa-cogs w-4"></i>
                             <span>AI Optimization</span>
@@ -178,25 +81,21 @@
                         <i class="fas fa-chevron-down text-xs transition-transform" id="optimization-icon"></i>
                     </button>
                     <div id="optimization-menu" class="ml-4 mt-1 space-y-1 hidden">
-                        <a href="#" onclick="showSection('topics')"
-                            class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
+                        <a href="#" onclick="showSection('topics')" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg text-sm">
                             <i class="fas fa-hashtag w-4"></i>
                             <span>Topics</span>
                         </a>
                     </div>
                 </div>
 
-                <a href="#" onclick="showSection('audio')"
-                    class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg">
+                <a href="#" onclick="showSection('audio')" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg">
                     <i class="fas fa-microphone w-4"></i>
                     <span>Audio Modality</span>
-                    <span class="coming-soon-badge">Soon</span>
                 </a>
-
+                
                 <!-- Agent Analytics with submenu -->
                 <div>
-                    <button onclick="toggleSubmenu('analytics')"
-                        class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
+                    <button onclick="toggleSubmenu('analytics')" class="nav-link w-full flex items-center justify-between px-4 py-3 rounded-lg">
                         <div class="flex items-center gap-3">
                             <i class="fas fa-chart-bar w-4"></i>
                             <span>Agent Analytics</span>
@@ -219,28 +118,23 @@
 
         <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
-            <header
-                class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-8 py-4 sticky top-0 z-10">
+            <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-8 py-4 sticky top-0 z-10">
                 <div class="flex items-center justify-between">
                     <div>
                         <h1 class="text-2xl font-bold dark:text-white" id="pageTitle">Dashboard</h1>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Displaying Data from 12:00AM EST today
-                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Displaying Data from 12:00AM EST today</p>
                     </div>
                     <div class="flex items-center gap-4">
-                        <select
-                            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                        <select class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
                             <option>Apr - May</option>
                             <option>May - Jun</option>
                         </select>
-                        <select
-                            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                        <select class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
                             <option>Monthly</option>
                             <option>Weekly</option>
                             <option>Daily</option>
                         </select>
-                        <select id="clientSelector" onchange="switchClient()"
-                            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                        <select id="clientSelector" onchange="switchClient()" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
                             <option value="0">PixelOne AV</option>
                             <option value="1">TomkenVet</option>
                             <option value="2">GBVets</option>
@@ -254,8 +148,7 @@
                 <div id="section-dashboard" class="section-content">
                     <!-- Top Stats -->
                     <div class="grid grid-cols-3 gap-6 mb-8">
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Brand Visibility</h3>
                                 <i class="fas fa-info-circle text-gray-400 text-xs"></i>
@@ -274,11 +167,9 @@
                             <p class="text-xs text-gray-400 mt-4">Displaying data from all time</p>
                         </div>
 
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Current Sentiment
-                                    Analysis</h3>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Current Sentiment Analysis</h3>
                                 <i class="fas fa-info-circle text-gray-400 text-xs"></i>
                             </div>
                             <div class="flex items-end justify-between">
@@ -295,11 +186,9 @@
                             <p class="text-xs text-gray-400 mt-4">Displaying data from all time</p>
                         </div>
 
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Brand Visibility Score
-                                </h3>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Brand Visibility Score</h3>
                                 <i class="fas fa-info-circle text-gray-400 text-xs"></i>
                             </div>
                             <div class="space-y-3">
@@ -336,13 +225,10 @@
                         <h2 class="text-xl font-bold dark:text-white mb-6">AI Optimization</h2>
                         <div class="grid grid-cols-2 gap-6">
                             <!-- Topic Ranking -->
-                            <div
-                                class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                                 <div class="flex items-center justify-between mb-6">
-                                    <h3 class="font-semibold dark:text-white"><i
-                                            class="fas fa-trophy text-yellow-500 mr-2"></i>Topic Ranking</h3>
-                                    <select
-                                        class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm dark:bg-gray-700 dark:text-white">
+                                    <h3 class="font-semibold dark:text-white"><i class="fas fa-trophy text-yellow-500 mr-2"></i>Topic Ranking</h3>
+                                    <select class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm dark:bg-gray-700 dark:text-white">
                                         <option>ChatGPT</option>
                                         <option>Gemini</option>
                                         <option>Perplexity</option>
@@ -352,14 +238,10 @@
                             </div>
 
                             <!-- AVI Assessment -->
-                            <div
-                                class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                                 <div class="flex items-center justify-between mb-6">
-                                    <h3 class="font-semibold dark:text-white"><i
-                                            class="fas fa-bolt text-yellow-400 mr-2"></i>AI Visibility Impact Assessment
-                                    </h3>
-                                    <select
-                                        class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm dark:bg-gray-700 dark:text-white">
+                                    <h3 class="font-semibold dark:text-white"><i class="fas fa-bolt text-yellow-400 mr-2"></i>AI Visibility Impact Assessment</h3>
+                                    <select class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm dark:bg-gray-700 dark:text-white">
                                         <option>Gemini</option>
                                         <option>ChatGPT</option>
                                         <option>Perplexity</option>
@@ -382,10 +264,8 @@
                                         <div class="text-xs text-green-300 mt-1">+40</div>
                                     </div>
                                 </div>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Your brand's overall AI
-                                    Visibility Impact is <span class="text-green-400 font-semibold">High</span>.</p>
-                                <button
-                                    class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-medium">
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Your brand's overall AI Visibility Impact is <span class="text-green-400 font-semibold">High</span>.</p>
+                                <button class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-medium">
                                     Optimization Hub
                                 </button>
                             </div>
@@ -394,15 +274,13 @@
 
                     <!-- Performance Trends -->
                     <div class="grid grid-cols-2 gap-6">
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                             <h3 class="font-semibold dark:text-white mb-4">Visibility Trend</h3>
                             <div style="height: 250px;">
                                 <canvas id="trendChart"></canvas>
                             </div>
                         </div>
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                             <h3 class="font-semibold dark:text-white mb-4">LLM Performance Comparison</h3>
                             <div style="height: 250px;">
                                 <canvas id="llmChart"></canvas>
@@ -411,159 +289,67 @@
                     </div>
                 </div>
 
-                <!-- Coming Soon Sections - All properly nested within the main p-8 div -->
+                <!-- Other Sections -->
                 <div id="section-content" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-pen-fancy mr-2"></i>AI
-                                Content Writer</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Generate AI-optimized content that ranks well
-                            across all major AI platforms.</p>
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="text-center">
-                                <div
-                                    class="feature-icon bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mx-auto">
-                                    <i class="fas fa-robot"></i>
-                                </div>
-                                <h3 class="font-semibold dark:text-white mb-2">AI-Powered Writing</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Generate optimized content for AI
-                                    search engines</p>
-                            </div>
-                            <div class="text-center">
-                                <div
-                                    class="feature-icon bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mx-auto">
-                                    <i class="fas fa-magic"></i>
-                                </div>
-                                <h3 class="font-semibold dark:text-white mb-2">Smart Templates</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Pre-built templates optimized for
-                                    visibility</p>
-                            </div>
-                            <div class="text-center">
-                                <div
-                                    class="feature-icon bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mx-auto">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <h3 class="font-semibold dark:text-white mb-2">Performance Tracking</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Monitor content performance across
-                                    LLMs</p>
-                            </div>
-                        </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-pen-fancy mr-2"></i>AI Content Writer</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Content generation tools and AI writing assistant will appear here.</p>
                     </div>
                 </div>
 
                 <div id="section-overview" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-chart-pie mr-2"></i>Overview
-                            </h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Comprehensive visibility overview and metrics will
-                            appear here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-chart-pie mr-2"></i>Overview</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Comprehensive visibility overview and metrics.</p>
                     </div>
                 </div>
 
                 <div id="section-visibility" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-eye mr-2"></i>Visibility
-                                Analysis</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Detailed visibility metrics and trends will appear
-                            here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-eye mr-2"></i>Visibility Analysis</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Detailed visibility metrics and trends.</p>
                     </div>
                 </div>
 
                 <div id="section-performance" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i
-                                    class="fas fa-tachometer-alt mr-2"></i>Performance Metrics</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Performance analysis and optimization opportunities
-                            will appear here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-tachometer-alt mr-2"></i>Performance Metrics</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Performance analysis and optimization opportunities.</p>
                     </div>
                 </div>
 
                 <div id="section-sentiment" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-comments mr-2"></i>Sentiment
-                                Analysis</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Brand sentiment tracking and analysis will appear
-                            here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-comments mr-2"></i>Sentiment Analysis</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Brand sentiment tracking and analysis.</p>
                     </div>
                 </div>
 
                 <div id="section-comparison" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i
-                                    class="fas fa-balance-scale mr-2"></i>Comparison</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Compare performance across different LLMs and time
-                            periods.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-balance-scale mr-2"></i>Comparison</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Compare performance across different LLMs and time periods.</p>
                     </div>
                 </div>
 
                 <div id="section-global" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-globe mr-2"></i>Global
-                                Insights</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Global market visibility and regional performance
-                            will appear here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-globe mr-2"></i>Global Insights</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Global market visibility and regional performance.</p>
                     </div>
                 </div>
 
                 <div id="section-topics" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-hashtag mr-2"></i>Topics
-                            </h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Topic performance and optimization strategies will
-                            appear here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-hashtag mr-2"></i>Topics</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Topic performance and optimization strategies.</p>
                     </div>
                 </div>
 
                 <div id="section-audio" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-microphone mr-2"></i>Audio
-                                Modality</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Voice search and audio content optimization will
-                            appear here.</p>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold dark:text-white mb-4"><i class="fas fa-microphone mr-2"></i>Audio Modality</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Voice search and audio content optimization.</p>
                     </div>
                 </div>
             </div>
@@ -642,7 +428,7 @@
         function showSection(section) {
             document.querySelectorAll('.section-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('section-' + section).classList.remove('hidden');
-
+            
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
             event.target.closest('.nav-link').classList.add('active');
 
@@ -691,7 +477,7 @@
         function updateCharts() {
             const textColor = isDark ? '#9CA3AF' : '#6B7280';
             const gridColor = isDark ? '#374151' : '#E5E7EB';
-
+            
             Object.values(charts).forEach(chart => chart && chart.destroy());
 
             const client = clients[currentClient];
@@ -717,98 +503,17 @@
                 }
             });
 
-            charts.sentiment = new Chart(document.getElementById('sentimentChart'), {
-                type: 'line',
-                data: {
-                    labels: ['', '', '', '', '', ''],
-                    datasets: [{
-                        data: [68, 70, 72, 69, 67, client.sentiment],
-                        borderColor: '#EF4444',
-                        borderWidth: 2,
-                        fill: false,
-                        tension: 0.4,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { x: { display: false }, y: { display: false } }
-                }
-            });
-
-            charts.trend = new Chart(document.getElementById('trendChart'), {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Visibility Score',
-                        data: [75, 78, 82, 85, 88, client.visibility],
-                        borderColor: '#3B82F6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        x: {
-                            grid: { color: gridColor },
-                            ticks: { color: textColor }
-                        },
-                        y: {
-                            grid: { color: gridColor },
-                            ticks: { color: textColor }
-                        }
-                    }
-                }
-            });
-
-            charts.llm = new Chart(document.getElementById('llmChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Gemini', 'Perplexity', 'ChatGPT'],
-                    datasets: [{
-                        label: 'Performance Score',
-                        data: [client.llm1, client.llm2, client.llm3],
-                        backgroundColor: ['#A855F7', '#10B981', '#3B82F6'],
-                        borderRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: textColor }
-                        },
-                        y: {
-                            grid: { color: gridColor },
-                            ticks: { color: textColor },
-                            beginAtZero: false,
-                            min: 80
-                        }
-                    }
-                }
-            });
+            // charts.sentiment = new Chart(document.getElementById('sentimentChart'), {
+            //     type: 'line',
+            //     data: {
+            //         labels: ['', '', '', '', '', ''],
+            //         datasets: [{
+            //             data: [68, 70, 72, 69, 67, client.sentiment],
+            //             borderColor: '#EF4444',
+            //             borderWidth: 2,
+            //             fill: false,
+            //             tension:
         }
-
-        // Initialize dashboard on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            updateDashboard();
-        });
     </script>
 </body>
-
 </html>

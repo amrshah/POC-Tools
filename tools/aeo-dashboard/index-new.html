@@ -412,48 +412,165 @@
                 </div>
 
                 <!-- Coming Soon Sections - All properly nested within the main p-8 div -->
+                <!-- AI Content Writer Section - Expanded -->
                 <div id="section-content" class="section-content hidden">
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 coming-soon-container">
-                        <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-bold dark:text-white"><i class="fas fa-pen-fancy mr-2"></i>AI
+                    <div class="space-y-6">
+                        <!-- Header -->
+                        <div
+                            class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <h2 class="text-2xl font-bold dark:text-white mb-2"><i class="fas fa-pen-fancy mr-2"></i>AI
                                 Content Writer</h2>
-                            <span class="coming-soon-badge" style="font-size: 12px; padding: 4px 12px;">Coming
-                                Soon</span>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Generate AEO-optimized content for
+                                maximum AI visibility</p>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Generate AI-optimized content that ranks well
-                            across all major AI platforms.</p>
+                        <!-- Content Generation Interface -->
                         <div class="grid grid-cols-3 gap-6">
-                            <div class="text-center">
+                            <!-- Left Panel - Settings -->
+                            <div class="col-span-1 space-y-4">
                                 <div
-                                    class="feature-icon bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mx-auto">
-                                    <i class="fas fa-robot"></i>
+                                    class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                                    <h3 class="font-semibold dark:text-white mb-4">Content Settings</h3>
+
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium dark:text-gray-300 mb-2">Template</label>
+                                            <select
+                                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                                                <option>Blog Post</option>
+                                                <option>Product Description</option>
+                                                <option>FAQ Answer</option>
+                                                <option>Service Page</option>
+                                                <option>How-To Guide</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium dark:text-gray-300 mb-2">Topic</label>
+                                            <input type="text" placeholder="e.g., Best AV systems for conference rooms"
+                                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm"
+                                                value="Best AV systems for conference rooms">
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium dark:text-gray-300 mb-2">Tone</label>
+                                            <select
+                                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-sm">
+                                                <option>Professional</option>
+                                                <option>Conversational</option>
+                                                <option>Technical</option>
+                                                <option>Friendly</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Target
+                                                LLMs</label>
+                                            <div class="space-y-2">
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" checked class="mr-2 rounded">
+                                                    <span class="text-sm dark:text-gray-300">ChatGPT</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" checked class="mr-2 rounded">
+                                                    <span class="text-sm dark:text-gray-300">Gemini</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" checked class="mr-2 rounded">
+                                                    <span class="text-sm dark:text-gray-300">Perplexity</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button
+                                            class="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium">
+                                            <i class="fas fa-magic mr-2"></i>Generate Content
+                                        </button>
+                                    </div>
                                 </div>
-                                <h3 class="font-semibold dark:text-white mb-2">AI-Powered Writing</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Generate optimized content for AI
-                                    search engines</p>
+                                <!-- AEO Score -->
+                                <div
+                                    class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-green-800 dark:text-green-300">AEO
+                                            Score</span>
+                                        <i class="fas fa-info-circle text-green-600 dark:text-green-400 text-xs"></i>
+                                    </div>
+                                    <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-1">92/100</div>
+                                    <p class="text-xs text-green-700 dark:text-green-300">Excellent optimization</p>
+                                </div>
                             </div>
-                            <div class="text-center">
+                            <!-- Right Panel - Preview -->
+                            <div class="col-span-2">
                                 <div
-                                    class="feature-icon bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mx-auto">
-                                    <i class="fas fa-magic"></i>
+                                    class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="font-semibold dark:text-white">Content Preview</h3>
+                                        <div class="flex gap-2">
+                                            <button
+                                                class="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300">
+                                                <i class="fas fa-copy mr-1"></i>Copy
+                                            </button>
+                                            <button
+                                                class="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300">
+                                                <i class="fas fa-download mr-1"></i>Export
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="prose dark:prose-invert max-w-none mb-6">
+                                        <h1 class="text-2xl font-bold dark:text-white mb-4">Best AV Systems for
+                                            Conference Rooms in 2025</h1>
+
+                                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                            When selecting the best AV systems for conference rooms, businesses need
+                                            solutions that deliver crystal-clear audio, high-definition video, and
+                                            seamless connectivity. Modern conference room AV systems integrate advanced
+                                            technologies to enhance collaboration and productivity.
+                                        </p>
+                                        <h2 class="text-xl font-semibold dark:text-white mt-6 mb-3">Key Features to
+                                            Consider</h2>
+                                        <ul
+                                            class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2 mb-4">
+                                            <li>4K video conferencing capabilities</li>
+                                            <li>Noise-canceling microphone arrays</li>
+                                            <li>Wireless presentation systems</li>
+                                            <li>Cloud-based management platforms</li>
+                                        </ul>
+                                        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 my-4">
+                                            <p class="text-sm text-blue-800 dark:text-blue-300">
+                                                <i class="fas fa-lightbulb mr-2"></i>
+                                                <strong>Pro Tip:</strong> Invest in scalable AV solutions that can grow
+                                                with your organization's needs.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Optimization Suggestions -->
+                                    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+                                        <h4 class="text-sm font-semibold dark:text-white mb-3">AI Optimization
+                                            Suggestions</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex items-start gap-2 text-sm">
+                                                <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+                                                <span class="dark:text-gray-300">Strong keyword placement in title and
+                                                    headers</span>
+                                            </div>
+                                            <div class="flex items-start gap-2 text-sm">
+                                                <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+                                                <span class="dark:text-gray-300">Natural language structure for voice
+                                                    search</span>
+                                            </div>
+                                            <div class="flex items-start gap-2 text-sm">
+                                                <i class="fas fa-exclamation-circle text-yellow-500 mt-0.5"></i>
+                                                <span class="dark:text-gray-300">Consider adding FAQ section for better
+                                                    AI understanding</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h3 class="font-semibold dark:text-white mb-2">Smart Templates</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Pre-built templates optimized for
-                                    visibility</p>
-                            </div>
-                            <div class="text-center">
-                                <div
-                                    class="feature-icon bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mx-auto">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <h3 class="font-semibold dark:text-white mb-2">Performance Tracking</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Monitor content performance across
-                                    LLMs</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div id="section-overview" class="section-content hidden">
                     <div
