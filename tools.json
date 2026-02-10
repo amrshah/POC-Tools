@@ -25,6 +25,13 @@
       "category": "AI/Marketing",
       "icon": "fa-solid fa-rocket"
     },
+	{
+    "name": "Image Text Extractor",
+    "description": "Extract text from images using OCR (Optical Character Recognition).",
+    "link": "./tools/image-text-extractor/",
+    "icon": "fa-solid fa-font"
+  },
+
   {
     "name": "Image Optimizer",
     "description": "A simple client-side image compression tool using Canvas API.",
