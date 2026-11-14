@@ -68,7 +68,7 @@ Keep the site static-first and browser-friendly. Improve the existing registry i
 - Alamia Skills, Antigravity Skills/workflows and Alamia 360 are not adequately represented.
 - The current selected-work section is a small manually maintained set; it needs stronger case-study links and live-demo links.
 - Several project links and labels should be verified against current repository names and actual project maturity before publishing.
-- The repository contains `how-to-guide.md` describing a React/Vite + SQLite CMS under `singularity-cms`, but the current default-branch root and deployment workflow operate on a static `index.html`. The guide also describes a manual dist-copy process and references `main`, whereas the repository default branch is `master`. This documentation/build-source mismatch must be resolved before modifying the portfolio build architecture.
+- The repository previously had a React/Vite + SQLite CMS under `singularity-cms`, but merged PR #5 deliberately retired that CMS and replaced the public site with a static portfolio. The active `master` branch deploys the root `index.html` and required profile image through GitHub Actions. The remaining `how-to-guide.md` was stale and still described the retired CMS, manual dist-copy deployment and a `main` branch. The housekeeping fix is to replace that guide and add a current repository README; no framework migration or new build system is required.
 
 **Direction**
 Retain the current visual identity and lightweight deployment unless a verified source/build audit proves a migration is needed. Improve the narrative and evidence first; do not rewrite the site just for technology fashion.
@@ -92,6 +92,8 @@ Rewrite it as a concise, current professional profile. Lead with technical leade
 
 ## 3. Information architecture for POC Tools
 
+Preserve the existing lightweight POC Tools design and direct-to-tool experience. This is an incremental information-architecture improvement, not a visual rebuild or SaaS dashboard. Keep the existing card/grid feel, restrained styling, fast static delivery and direct links to standalone tools. Add only the missing discovery/navigation features.
+
 Use four top-level collections:
 
 1. **Tools** — practical browser utilities and AI tools people can use immediately.
@@ -101,6 +103,10 @@ Use four top-level collections:
 
 The homepage should include:
 - A concise positioning statement and clear “Explore tools” entry point.
+- A compact left sidebar on desktop for collection/category navigation; collapse it into a simple drawer/menu on mobile rather than permanently consuming small-screen space.
+- Search near the top of the tool listing, filtering tool names, descriptions and tags client-side.
+- Category filters that work alongside search, with a clear “All tools” reset.
+- Keep the main content area as a lightweight responsive card grid; do not add dashboard widgets, user accounts, heavy animation or complex app-shell behavior.
 - Featured practical tools (Image Optimizer first).
 - Featured AI/skills demonstrations.
 - A small Alamia 360 research feature.
