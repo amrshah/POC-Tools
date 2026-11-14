@@ -89,7 +89,7 @@
   {
     "name": "AI Landing Page Optimizer",
     "description": "Analyze a landing page and explore AI-powered optimization suggestions.",
-    "link": "./tools/ai-landing-optimizer/",
+    "link": "tools/ai-landing-optimizer/",
     "icon": "fa-solid fa-rocket",
     "category": "AI & Marketing",
     "tags": [
