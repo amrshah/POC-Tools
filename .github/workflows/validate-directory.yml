@@ -1,0 +1,63 @@
+name: Validate POC Tools directory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'tools.json'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - '.github/workflows/validate-directory.yml'
+      - 'tools/**'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'tools.json'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - '.github/workflows/validate-directory.yml'
+      - 'tools/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check directory JavaScript syntax
+        run: node --check assets/js/main.js
+      - name: Validate tool registry JSON
+        run: python -m json.tool tools.json > /dev/null
+      - name: Verify every registered tool link
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          tools = json.loads(Path("tools.json").read_text(encoding="utf-8"))
+          if not isinstance(tools, list) or not tools:
+              raise SystemExit("tools.json must contain a non-empty array")
+
+          failures = []
+          for tool in tools:
+              link = tool.get("link", "")
+              if not link or link.startswith("/") or "://" in link or ".." in Path(link).parts:
+                  failures.append(f"{tool.get('name', '<unnamed>')}: expected a safe relative link, got {link!r}")
+                  continue
+              target = Path(link[2:] if link.startswith("./") else link)
+              if target.is_dir():
+                  target = target / "index.html"
+              if not target.is_file():
+                  failures.append(f"{tool.get('name', '<unnamed>')}: missing target {target}")
+
+          if failures:
+              raise SystemExit("\n".join(failures))
+          print(f"Validated {len(tools)} tool entries and their local targets.")
+          PY
