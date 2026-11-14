@@ -73,7 +73,6 @@
       const count = tools.filter(tool => tool.category === category).length;
       categoryNav.append(createCategoryButton(category, count, categoryIcons[category] || 'fa-regular fa-folder'));
     });
-    document.getElementById('all-count').textContent = String(tools.length);
   }
 
   function createCard(tool) {
