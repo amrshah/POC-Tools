@@ -17,6 +17,24 @@
     "featured": true
   },
   {
+    "name": "Batch Image Optimizer",
+    "description": "Compress and resize multiple images at once, then download individually or as a ZIP. Processing stays in your browser.",
+    "link": "./tools/image-optimizer-batch/",
+    "icon": "fa-solid fa-images",
+    "category": "Image Tools",
+    "tags": [
+      "image",
+      "batch",
+      "compress",
+      "resize",
+      "webp",
+      "png",
+      "jpeg",
+      "zip"
+    ],
+    "status": "Available"
+  },
+  {
     "name": "Image Converter",
     "description": "Convert images between PNG, JPG and WebP formats in your browser.",
     "link": "./tools/image-converter/",
