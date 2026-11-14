@@ -171,5 +171,19 @@
       "writing"
     ],
     "status": "Available"
+  },
+  {
+    "name": "Markdown Chat Viewer",
+    "description": "Open a Markdown or text export of a chat and read it as separate user, assistant and system messages.",
+    "link": "./tools/ai-chat-viewer/",
+    "icon": "fa-solid fa-comments",
+    "category": "Productivity",
+    "tags": [
+      "markdown",
+      "chat export",
+      "conversation",
+      "viewer"
+    ],
+    "status": "Available"
   }
 ]
