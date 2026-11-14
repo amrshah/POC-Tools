@@ -58,6 +58,6 @@ jobs:
                   failures.append(f"{tool.get('name', '<unnamed>')}: missing target {target}")
 
           if failures:
-              raise SystemExit("\\n".join(failures))
+              raise SystemExit("\n".join(failures))
           print(f"Validated {len(tools)} tool entries and their local targets.")
           PY
